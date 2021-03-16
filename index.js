@@ -37,7 +37,7 @@ window.onload = () => {
       location: getGameLocation(gameInfoTable),
       teams: teams,
       scoreboard: getScoreboard(scoreboardTable, teams),
-      players: getPlayers(teamOnePlayersTable, teamTwoPlayersTable)
+      players: getPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
     }
 
     document.getElementById('open-file-btn').style.display = 'none'
@@ -80,9 +80,7 @@ window.onload = () => {
 
   function getGameTime (gameInfoTable) {
     const gameLocationAndTime = gameInfoTable.querySelectorAll('tr')[2].firstElementChild.textContent
-
-    let gameDateTime
-    [gameDateTime] = gameLocationAndTime.split(' at ')
+    let [gameDateTime] = gameLocationAndTime.split(' at ')
 
     const timestamp = Date.parse(gameDateTime)
     gameDateTime = new Date(timestamp)
@@ -92,8 +90,7 @@ window.onload = () => {
 
   function getGameLocation (gameInfoTable) {
     const gameLocationAndTime = gameInfoTable.querySelectorAll('tr')[2].firstElementChild.textContent
-    let gameLocation
-    [, gameLocation] = gameLocationAndTime.split(' at ')
+    const [, gameLocation] = gameLocationAndTime.split(' at ')
 
     return gameLocation
   }
@@ -107,11 +104,11 @@ window.onload = () => {
 
       scoreboard[team.name].firstP = teamScore[2].textContent
 
-      if (gameLength == 5) {
+      if (gameLength === 5) {
         scoreboard[team.name].secondP = undefined
         scoreboard[team.name].thirdP = undefined
         scoreboard[team.name].final = teamScore[4].textContent
-      } else if (gameLength == 7) {
+      } else if (gameLength === 7) {
         scoreboard[team.name].secondP = teamScore[4].textContent
         scoreboard[team.name].thirdP = undefined
         scoreboard[team.name].final = teamScore[6].textContent
@@ -125,6 +122,80 @@ window.onload = () => {
     return scoreboard
   }
 
-  function getPlayers (teamOnePlayersTable, teamTwoPlayersTable) {
+  function getPlayers (teams, teamOnePlayersTable, teamTwoPlayersTable) {
+    let teamOnePlayers = teamOnePlayersTable.querySelectorAll('tr')
+    teamOnePlayers = [].slice.call(teamOnePlayers, 3)
+    teamOnePlayers.splice(-2, 2)
+    teamOnePlayers = parseTeamPlayers(teamOnePlayers)
+
+    let teamTwoPlayers = teamTwoPlayersTable.querySelectorAll('tr')
+    teamTwoPlayers = [].slice.call(teamTwoPlayers, 3)
+    teamTwoPlayers.splice(-2, 2)
+    teamTwoPlayers = parseTeamPlayers(teamTwoPlayers)
+
+    return { [teams[0].name]: teamOnePlayers, [teams[1].name]: teamTwoPlayers }
+  }
+
+  function parseTeamPlayers (teamPlayers) {
+    const parsedTeamPlayers = []
+    for (const player of teamPlayers) {
+      const [
+        name,                    // Player Name
+        position,                // POS
+        minutes,                 // MIN
+        fieldGoalMadeAttempts,   // FGM-A
+        threePointsMadeAttempts, // 3PM-A
+        freeThrowMadeAttempts,   // FTM-A
+        offensiveRebounds,       // OFF
+        defensiveRebounds,       // DEF
+        totalRebounds,           // TOT
+        assists,                 // AST
+        ,                        // FR
+        personalFouls,           // PF
+        steals,                  // ST
+        turnouvers,              // TO
+        blocks,                  // BS
+        points,                  // PTS
+                                 // +/-
+      ] = player.querySelectorAll('td')
+
+      const [lastName, firstName] = name.textContent.split(',')
+
+      const [fieldGoalsMade, fieldGoalsAttempts] = fieldGoalMadeAttempts.textContent.trim().split('-')
+      const fieldGoalsPercentage = +(parseInt(fieldGoalsMade, 10) / parseInt(fieldGoalsAttempts, 10) * 100).toFixed(2) || 0
+
+      const [threePointsMade, threePointsAttempts] = threePointsMadeAttempts.textContent.trim().split('-')
+      const threePointsPercentage = +(parseInt(threePointsMade, 10) / parseInt(threePointsAttempts, 10) * 100).toFixed(2) || 0
+
+      const [freeThrowMade, freeThrowAttempts] = freeThrowMadeAttempts.textContent.trim().split('-')
+      const freeThrowPercentage = +(parseInt(freeThrowMade, 10) / parseInt(freeThrowAttempts, 10) * 100).toFixed(2) || 0
+
+      parsedTeamPlayers.push({
+        firstName,
+        lastName,
+        position: position.textContent.trim(),
+        minutes: minutes.textContent.trim(),
+        fieldGoalsMade: parseInt(fieldGoalsMade, 10),
+        fieldGoalsAttempts: parseInt(fieldGoalsAttempts, 10),
+        fieldGoalsPercentage,
+        threePointsMade: parseInt(threePointsMade, 10),
+        threePointsAttempts: parseInt(threePointsAttempts, 10),
+        threePointsPercentage,
+        freeThrowMade: parseInt(freeThrowMade, 10),
+        freeThrowAttempts: parseInt(freeThrowAttempts, 10),
+        freeThrowPercentage,
+        offensiveRebounds: parseInt(offensiveRebounds.textContent.trim(), 10),
+        defensiveRebounds: parseInt(defensiveRebounds.textContent.trim(), 10),
+        totalRebounds: parseInt(totalRebounds.textContent.trim(), 10),
+        assists: parseInt(assists.textContent.trim(), 10),
+        personalFouls: parseInt(personalFouls.textContent.trim(), 10),
+        steals: parseInt(steals.textContent.trim(), 10),
+        turnouvers: parseInt(turnouvers.textContent.trim(), 10),
+        blocks: parseInt(blocks.textContent.trim(), 10),
+        points: parseInt(points.textContent.trim(), 10)
+      })
+    }
+
+    return parsedTeamPlayers
   }
 }
