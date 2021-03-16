@@ -1,0 +1,19 @@
+{
+  "name": "nba-stats-validator",
+  "version": "1.0.0",
+  "description": "WebApp to validate nba stats",
+  "main": "./assets/js/index.js",
+  "license": "GNU",
+  "devDependencies": {
+    "browser-sync": "^2.26.14",
+    "eslint": "^7.22.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}

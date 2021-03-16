@@ -1,3 +1,5 @@
+import './populate.js'
+
 window.onload = () => {
   const openFileBtn = document.getElementById('open-file-btn')
 
@@ -40,9 +42,7 @@ window.onload = () => {
       players: getPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
     }
 
-    document.getElementById('open-file-btn').style.display = 'none'
-    document.getElementById('content').style.display = 'block'
-    document.getElementById('content').innerHTML = fileData
+    populateHtml(parsedData)
   }
 
   function getTeamTriCode (team) {

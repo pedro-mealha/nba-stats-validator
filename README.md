@@ -1,2 +1,2 @@
 # nba-stats-validator
-Electron App to validate nba stats
+ WebApp to validate nba stats
