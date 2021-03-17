@@ -9,11 +9,11 @@ gulp.task('clean', function (cb) {
 })
 
 gulp.task('build', function () {
-  del(['build'])
+//  del(['build'])
 
   return gulp.src('./assets/js/*.js')
     .pipe(uglify())
-    .pipe(concat('app.js'))
+    // .pipe(concat('app.js'))
     .pipe(gulp.dest('build'))
 })
 

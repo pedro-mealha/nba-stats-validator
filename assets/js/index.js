@@ -1,3 +1,8 @@
+import { populateHtml } from './populate.js'
+import { getGameId, getGameData } from './external.js'
+
+export let fileData
+
 window.onload = () => {
   const openFileBtn = document.getElementById('open-file-btn')
 
@@ -21,7 +26,7 @@ window.onload = () => {
     }
   }
 
-  function parseFileHtml (fileData, filename) {
+  async function parseFileHtml (fileData, filename) {
     const parser = new DOMParser()
     const html = parser.parseFromString(fileData, 'text/html')
 
@@ -42,6 +47,14 @@ window.onload = () => {
       players: getPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
     }
 
+    const dateFormated = `${parsedData.startsAt.getFullYear()}${('0' + (parsedData.startsAt.getMonth() + 1)).slice(-2)}${parsedData.startsAt.getDate()}`
+    const gameId = await getGameId(dateFormated, teams)
+    const gameData = await getGameData(dateFormated, gameId)
+
+    parsedData.teams = updateTeamData(teams, gameData)
+    parsedData.gameData = gameData
+
+    fileData = parsedData
     populateHtml(parsedData)
   }
 
@@ -207,5 +220,19 @@ window.onload = () => {
     }
 
     return parsedTeamPlayers
+  }
+
+  function updateTeamData (teams, gameData) {
+    const parsedTeams = {}
+
+    if (gameData.basicGameData.vTeam.triCode === teams[0].triCode) {
+      parsedTeams.visitor = teams[0]
+      parsedTeams.host = teams[1]
+    } else {
+      parsedTeams.visitor = teams[1]
+      parsedTeams.host = teams[0]
+    }
+
+    return parsedTeams
   }
 }

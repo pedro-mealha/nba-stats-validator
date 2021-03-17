@@ -5,8 +5,17 @@ body {
 }
 
 #content {
-    margin-top: 20px;
+    margin: 2% 10% auto 10%;
     display: none;
+}
+
+.teams-display {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#host-team-name, #visitor-team-name:first-letter {
+    text-transform:capitalize;
 }
 
 .center {

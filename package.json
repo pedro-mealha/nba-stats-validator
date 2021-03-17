@@ -4,6 +4,10 @@
   "description": "WebApp to validate nba stats",
   "main": "./assets/js/index.js",
   "license": "GNU",
+  "scripts": {
+    "build": "gulp build",
+    "watch": "gulp browser-sync"
+  },
   "devDependencies": {
     "browser-sync": "^2.26.14",
     "eslint": "^7.22.0",
