@@ -1,1 +1,0 @@
-function populateHtml(e){console.log(e),document.getElementById("open-file-btn").style.display="none",document.getElementById("content").style.display="block"}

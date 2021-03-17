@@ -15,5 +15,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-jshint": "^2.1.0",
     "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {
+    "del": "^6.0.0"
   }
 }

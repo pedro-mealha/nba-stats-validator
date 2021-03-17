@@ -1,5 +1,3 @@
-import './populate.js'
-
 window.onload = () => {
   const openFileBtn = document.getElementById('open-file-btn')
 
