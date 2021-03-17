@@ -10,16 +10,18 @@ window.onload = () => {
 
   input.onchange = e => {
     const file = e.target.files[0]
+    const filename = file.name.replace('.htm', '')
     const reader = new FileReader()
     reader.readAsText(file, 'utf16le')
 
     reader.onload = readerEvent => {
       const fileData = readerEvent.target.result
-      parseFileHtml(fileData)
+
+      parseFileHtml(fileData, filename)
     }
   }
 
-  function parseFileHtml (fileData) {
+  function parseFileHtml (fileData, filename) {
     const parser = new DOMParser()
     const html = parser.parseFromString(fileData, 'text/html')
 
@@ -30,7 +32,7 @@ window.onload = () => {
     const teamOnePlayersTable = tables[2]
     const teamTwoPlayersTable = tables[3]
 
-    const teams = getTeams(gameInfoTable)
+    const teams = getTeams(gameInfoTable, filename)
 
     const parsedData = {
       startsAt: getGameTime(gameInfoTable),
@@ -43,11 +45,10 @@ window.onload = () => {
     populateHtml(parsedData)
   }
 
-  function getTeamTriCode (team) {
+  function getTeamTriCode (team, fallback) {
     const exceptions = [
       { name: 'Golden State', triCode: 'GSW' },
-      { name: 'Los Angeles', triCode: 'LAC' },
-      // {name: 'Los Angeles', triCode: 'LAL'},
+      { name: 'Los Angeles', triCode: ['LAC', 'LAL'] },
       { name: 'New York', triCode: 'NYK' },
       { name: 'New Orleans', triCode: 'NOP' },
       { name: 'Oklahoma City', triCode: 'OKC' },
@@ -62,6 +63,10 @@ window.onload = () => {
     const teamException = exceptions.filter(exception => exception.name === team)
     if (teamException.length > 0) {
       triCode = teamException[0].triCode
+
+      if (Array.isArray(triCode) && triCode.includes(fallback)) {
+        triCode = fallback
+      }
     }
 
     return {
@@ -70,10 +75,17 @@ window.onload = () => {
     }
   }
 
-  function getTeams (gameInfoTable) {
+  function getTeams (gameInfoTable, filename) {
     let teams = gameInfoTable.querySelectorAll('tr')[1].firstElementChild.textContent
     teams = teams.split(' Vs ')
-    return teams.map(getTeamTriCode)
+
+    const teamOneTriCode = filename.substring(0, 3)
+    const teamTwoTriCode = filename.slice(-3)
+
+    return teams.map((team, key) => {
+      const fallback = key === 0 ? teamOneTriCode : teamTwoTriCode
+      return getTeamTriCode(team, fallback)
+    })
   }
 
   function getGameTime (gameInfoTable) {
