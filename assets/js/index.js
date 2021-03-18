@@ -163,7 +163,6 @@ window.onload = () => {
     teamTwoPlayers.splice(-1, 1)
     teams[1].players = teamTwoPlayers
 
-    console.log(teams)
     return teams
   }
 
