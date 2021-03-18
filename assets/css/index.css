@@ -18,12 +18,19 @@ body {
     text-transform:capitalize;
 }
 
+#host-team-points, #visitor-team-points {
+    font-size: 1.6em;
+}
+
+.team-logo {
+    max-width: 60%;
+}
+
 .final-score {
-    margin-top: 20%;
+    margin-top: 40%;
 }
 
 .quarters-score {
-    margin-top: 10%;
     padding-right: 4%;
     padding-left: 4%;
     font-size: 0.7em;

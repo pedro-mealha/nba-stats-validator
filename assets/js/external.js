@@ -21,6 +21,11 @@ export async function getGameData (date, gameId) {
     })
 }
 
+export function getTeamLogo (teamId) {
+  const url = config.default.nba_logo_url
+  return url.replace('{teamId}', teamId)
+}
+
 function httpGet (theUrl) {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest()

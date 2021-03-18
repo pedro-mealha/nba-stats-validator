@@ -1,5 +1,5 @@
 import { populateHtml } from './populate.js'
-import { getGameId, getGameData } from './external.js'
+import { getGameId, getGameData, getTeamLogo } from './external.js'
 
 window.onload = () => {
   const openFileBtn = document.getElementById('open-file-btn')
@@ -56,7 +56,20 @@ window.onload = () => {
     populateHtml(parsedData)
   }
 
-  function getTeamTriCode (team, fallback) {
+  function getTeams (gameInfoTable, filename) {
+    let teams = gameInfoTable.querySelectorAll('tr')[1].firstElementChild.textContent
+    teams = teams.split(' Vs ')
+
+    const teamOneTriCode = filename.substring(0, 3)
+    const teamTwoTriCode = filename.slice(-3)
+
+    return teams.map((team, key) => {
+      const fallback = key === 0 ? teamOneTriCode : teamTwoTriCode
+      return getTeamBasicData(team, fallback)
+    })
+  }
+
+  function getTeamBasicData (team, fallback) {
     const exceptions = [
       { name: 'Golden State', triCode: 'GSW' },
       { name: 'Los Angeles', triCode: ['LAC', 'LAL'] },
@@ -86,19 +99,6 @@ window.onload = () => {
     }
   }
 
-  function getTeams (gameInfoTable, filename) {
-    let teams = gameInfoTable.querySelectorAll('tr')[1].firstElementChild.textContent
-    teams = teams.split(' Vs ')
-
-    const teamOneTriCode = filename.substring(0, 3)
-    const teamTwoTriCode = filename.slice(-3)
-
-    return teams.map((team, key) => {
-      const fallback = key === 0 ? teamOneTriCode : teamTwoTriCode
-      return getTeamTriCode(team, fallback)
-    })
-  }
-
   function getGameTime (gameInfoTable) {
     const gameLocationAndTime = gameInfoTable.querySelectorAll('tr')[2].firstElementChild.textContent
     let [gameDateTime] = gameLocationAndTime.split(' at ')
@@ -121,23 +121,23 @@ window.onload = () => {
       const teamScore = scoreboardTable.querySelectorAll('tr')[i + 1].children
       const gameLength = teamScore.length
 
-      team.score = { firstP: teamScore[2].textContent }
+      team.score = { firstP: parseInt(teamScore[2].textContent, 10) }
 
       if (gameLength === 5) {
         team.score.secondP = undefined
         team.score.thirdP = undefined
         team.score.fourthP = undefined
-        team.score.final = teamScore[4].textContent
+        team.score.final = parseInt(teamScore[4].textContent, 10)
       } else if (gameLength === 7) {
-        team.score.secondP = teamScore[4].textContent
+        team.score.secondP = parseInt(teamScore[4].textContent, 10)
         team.score.thirdP = undefined
         team.score.fourthP = undefined
-        team.score.final = teamScore[6].textContent
+        team.score.final = parseInt(teamScore[6].textContent, 10)
       } else {
-        team.score.secondP = teamScore[4].textContent
-        team.score.thirdP = teamScore[6].textContent
-        team.score.fourthP = teamScore[8].textContent
-        team.score.final = teamScore[10].textContent
+        team.score.secondP = parseInt(teamScore[4].textContent, 10)
+        team.score.thirdP = parseInt(teamScore[6].textContent, 10)
+        team.score.fourthP = parseInt(teamScore[8].textContent, 10)
+        team.score.final = parseInt(teamScore[10].textContent, 10)
       }
     }
 
@@ -246,6 +246,9 @@ window.onload = () => {
       teams[0].id = gameData.basicGameData.hTeam.teamId
       parsedTeams.host = teams[0]
     }
+
+    parsedTeams.host.logo = getTeamLogo(parsedTeams.host.id)
+    parsedTeams.visitor.logo = getTeamLogo(parsedTeams.visitor.id)
 
     return parsedTeams
   }
