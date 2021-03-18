@@ -1,8 +1,6 @@
 import { populateHtml } from './populate.js'
 import { getGameId, getGameData } from './external.js'
 
-export let fileData
-
 window.onload = () => {
   const openFileBtn = document.getElementById('open-file-btn')
 
@@ -37,14 +35,14 @@ window.onload = () => {
     const teamOnePlayersTable = tables[2]
     const teamTwoPlayersTable = tables[3]
 
-    const teams = getTeams(gameInfoTable, filename)
+    let teams = getTeams(gameInfoTable, filename)
+    teams = addScoreboard(scoreboardTable, teams)
+    teams = addPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
 
     const parsedData = {
       startsAt: getGameTime(gameInfoTable),
       location: getGameLocation(gameInfoTable),
-      teams: teams,
-      scoreboard: getScoreboard(scoreboardTable, teams),
-      players: getPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
+      teams: teams
     }
 
     const dateFormated = `${parsedData.startsAt.getFullYear()}${('0' + (parsedData.startsAt.getMonth() + 1)).slice(-2)}${parsedData.startsAt.getDate()}`
@@ -54,7 +52,7 @@ window.onload = () => {
     parsedData.teams = updateTeamData(teams, gameData)
     parsedData.gameData = gameData
 
-    fileData = parsedData
+    window.fileData = parsedData
     populateHtml(parsedData)
   }
 
@@ -118,54 +116,60 @@ window.onload = () => {
     return gameLocation
   }
 
-  function getScoreboard (scoreboardTable, teams) {
-    const scoreboard = { [teams[0].name]: {}, [teams[1].name]: {} }
-
+  function addScoreboard (scoreboardTable, teams) {
     for (const [i, team] of teams.entries()) {
       const teamScore = scoreboardTable.querySelectorAll('tr')[i + 1].children
       const gameLength = teamScore.length
 
-      console.log(teamScore)
-      scoreboard[team.name].firstP = teamScore[2].textContent
+      team.score = { firstP: teamScore[2].textContent }
 
       if (gameLength === 5) {
-        scoreboard[team.name].secondP = undefined
-        scoreboard[team.name].thirdP = undefined
-        scoreboard[team.name].fourthP = undefined
-        scoreboard[team.name].final = teamScore[4].textContent
+        team.score.secondP = undefined
+        team.score.thirdP = undefined
+        team.score.fourthP = undefined
+        team.score.final = teamScore[4].textContent
       } else if (gameLength === 7) {
-        scoreboard[team.name].secondP = teamScore[4].textContent
-        scoreboard[team.name].thirdP = undefined
-        scoreboard[team.name].fourthP = undefined
-        scoreboard[team.name].final = teamScore[6].textContent
+        team.score.secondP = teamScore[4].textContent
+        team.score.thirdP = undefined
+        team.score.fourthP = undefined
+        team.score.final = teamScore[6].textContent
       } else {
-        scoreboard[team.name].secondP = teamScore[4].textContent
-        scoreboard[team.name].thirdP = teamScore[6].textContent
-        scoreboard[team.name].fourthP = teamScore[8].textContent
-        scoreboard[team.name].final = teamScore[10].textContent
+        team.score.secondP = teamScore[4].textContent
+        team.score.thirdP = teamScore[6].textContent
+        team.score.fourthP = teamScore[8].textContent
+        team.score.final = teamScore[10].textContent
       }
     }
 
-    return scoreboard
+    return teams
   }
 
-  function getPlayers (teams, teamOnePlayersTable, teamTwoPlayersTable) {
+  function addPlayers (teams, teamOnePlayersTable, teamTwoPlayersTable) {
     let teamOnePlayers = teamOnePlayersTable.querySelectorAll('tr')
     teamOnePlayers = [].slice.call(teamOnePlayers, 3)
-    teamOnePlayers.splice(-2, 2)
-    teamOnePlayers = parseTeamPlayers(teamOnePlayers)
+    teamOnePlayers.splice(-1, 1)
+    teamOnePlayers = parseStats(teamOnePlayers)
 
     let teamTwoPlayers = teamTwoPlayersTable.querySelectorAll('tr')
     teamTwoPlayers = [].slice.call(teamTwoPlayers, 3)
     teamTwoPlayers.splice(-2, 2)
-    teamTwoPlayers = parseTeamPlayers(teamTwoPlayers)
+    teamTwoPlayers = parseStats(teamTwoPlayers)
 
-    return { [teams[0].name]: teamOnePlayers, [teams[1].name]: teamTwoPlayers }
+    teams[0].stats = teamOnePlayers[teamOnePlayers.length - 1]
+    teamOnePlayers.splice(-1, 1)
+    teams[0].players = teamOnePlayers
+
+    teams[1].stats = teamTwoPlayers[teamTwoPlayers.length - 1]
+    teamTwoPlayers.splice(-1, 1)
+    teams[1].players = teamTwoPlayers
+
+    console.log(teams)
+    return teams
   }
 
-  function parseTeamPlayers (teamPlayers) {
-    const parsedTeamPlayers = []
-    for (const player of teamPlayers) {
+  function parseStats (stats) {
+    const parsedStats = []
+    for (const stat of stats) {
       const [
         name,                    // Player Name
         position,                // POS
@@ -184,7 +188,7 @@ window.onload = () => {
         blocks,                  // BS
         points,                  // PTS
                                  // +/-
-      ] = player.querySelectorAll('td')
+      ] = stat.querySelectorAll('td')
 
       const [lastName, firstName] = name.textContent.split(',')
 
@@ -197,7 +201,7 @@ window.onload = () => {
       const [freeThrowMade, freeThrowAttempts] = freeThrowMadeAttempts.textContent.trim().split('-')
       const freeThrowPercentage = +(parseInt(freeThrowMade, 10) / parseInt(freeThrowAttempts, 10) * 100).toFixed(2) || 0
 
-      parsedTeamPlayers.push({
+      parsedStats.push({
         firstName,
         lastName,
         position: position.textContent.trim(),
@@ -223,17 +227,23 @@ window.onload = () => {
       })
     }
 
-    return parsedTeamPlayers
+    return parsedStats
   }
 
   function updateTeamData (teams, gameData) {
     const parsedTeams = {}
 
     if (gameData.basicGameData.vTeam.triCode === teams[0].triCode) {
+      teams[0].id = gameData.basicGameData.vTeam.teamId
       parsedTeams.visitor = teams[0]
+
+      teams[1].id = gameData.basicGameData.hTeam.teamId
       parsedTeams.host = teams[1]
     } else {
+      teams[1].id = gameData.basicGameData.vTeam.teamId
       parsedTeams.visitor = teams[1]
+
+      teams[0].id = gameData.basicGameData.hTeam.teamId
       parsedTeams.host = teams[0]
     }
 
