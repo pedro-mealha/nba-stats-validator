@@ -34,17 +34,31 @@
             <div class="col" id="location"></div>
         </div>
 
-        <div class="row justify-content-md-center text-center teams-display align-items-center">
+        <div class="row justify-content-md-center text-center teams-display">
             <div class="col-4" id="host-team">
                 <img>
                 <p id="host-team-name"></p>
                 <p id="host-team-tricode"></p>
             </div>
-            <div class="col-4">
-                <div class="row justify-content-md-center text-center">
+            <div class="col-4 d-flex flex-column justify-content-between">
+                <div class="row text-center align-items-center final-score">
                     <div class="col" id="host-team-points"></div>
                     <div class="col">VS</div>
                     <div class="col" id="visitor-team-points"></div>
+                </div>
+                <div class="row align-items-end quarters-score">
+                    <div class="col-3">
+                        1P <p><span id="host-points-1p"></span> - <span id="visitor-points-1p"></span></p>
+                    </div>
+                    <div class="col-3">
+                        2P <p><span id="host-points-2p"></span> - <span id="visitor-points-2p"></span></p>
+                    </div>
+                    <div class="col-3">
+                        3P <p><span id="host-points-3p"></span> - <span id="visitor-points-3p"></span></p>
+                    </div>
+                    <div class="col-3">
+                        4P <p><span id="host-points-4p"></span> - <span id="visitor-points-4p"></span></p>
+                    </div>
                 </div>
             </div>
             <div class="col-4" id="visitor-team">

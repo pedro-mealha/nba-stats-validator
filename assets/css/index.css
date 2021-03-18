@@ -18,6 +18,17 @@ body {
     text-transform:capitalize;
 }
 
+.final-score {
+    margin-top: 20%;
+}
+
+.quarters-score {
+    margin-top: 10%;
+    padding-right: 4%;
+    padding-left: 4%;
+    font-size: 0.7em;
+}
+
 .center {
     position: absolute;
     left: 50%;
