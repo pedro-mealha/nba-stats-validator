@@ -125,20 +125,24 @@ window.onload = () => {
       const teamScore = scoreboardTable.querySelectorAll('tr')[i + 1].children
       const gameLength = teamScore.length
 
+      console.log(teamScore)
       scoreboard[team.name].firstP = teamScore[2].textContent
 
       if (gameLength === 5) {
         scoreboard[team.name].secondP = undefined
         scoreboard[team.name].thirdP = undefined
+        scoreboard[team.name].fourthP = undefined
         scoreboard[team.name].final = teamScore[4].textContent
       } else if (gameLength === 7) {
         scoreboard[team.name].secondP = teamScore[4].textContent
         scoreboard[team.name].thirdP = undefined
+        scoreboard[team.name].fourthP = undefined
         scoreboard[team.name].final = teamScore[6].textContent
       } else {
         scoreboard[team.name].secondP = teamScore[4].textContent
         scoreboard[team.name].thirdP = teamScore[6].textContent
-        scoreboard[team.name].final = teamScore[8].textContent
+        scoreboard[team.name].fourthP = teamScore[8].textContent
+        scoreboard[team.name].final = teamScore[10].textContent
       }
     }
 
