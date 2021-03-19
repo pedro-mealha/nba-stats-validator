@@ -40,7 +40,7 @@ window.onload = () => {
     teams = addPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
 
     const parsedData = {
-      startsAt: getGameTime(gameInfoTable),
+      startsAt: getGameDate(gameInfoTable),
       location: getGameLocation(gameInfoTable),
       teams: teams
     }
@@ -48,6 +48,8 @@ window.onload = () => {
     const dateFormated = `${parsedData.startsAt.getFullYear()}${('0' + (parsedData.startsAt.getMonth() + 1)).slice(-2)}${parsedData.startsAt.getDate()}`
     const gameId = await getGameId(dateFormated, teams)
     const gameData = await getGameData(dateFormated, gameId)
+
+    parsedData.startsAt = getGameTime(gameInfoTable, gameData)
 
     parsedData.teams = updateTeamData(teams, gameData)
     parsedData.gameData = gameData
@@ -99,14 +101,19 @@ window.onload = () => {
     }
   }
 
-  function getGameTime (gameInfoTable) {
+  function getGameDate (gameInfoTable) {
     const gameLocationAndTime = gameInfoTable.querySelectorAll('tr')[2].firstElementChild.textContent
-    let [gameDateTime] = gameLocationAndTime.split(' at ')
+    const [gameDate] = gameLocationAndTime.split(' ')
 
-    const timestamp = Date.parse(gameDateTime)
-    gameDateTime = new Date(timestamp)
+    return new Date(gameDate)
+  }
 
-    return gameDateTime
+  function getGameTime (gameInfoTable, gameData) {
+    const gameLocationAndTime = gameInfoTable.querySelectorAll('tr')[2].firstElementChild.textContent
+    const [gameDate] = gameLocationAndTime.split(' ')
+    const gameTime = gameData.basicGameData.startTimeEastern.replace('ET', '')
+
+    return new Date(`${gameDate} ${gameTime} EST`)
   }
 
   function getGameLocation (gameInfoTable) {
