@@ -14,6 +14,7 @@ gulp.task('build', function () {
 
 gulp.task('build-dev', function () {
   return gulp.src('./assets/js/*.js')
+    .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('build'))
 })
 
