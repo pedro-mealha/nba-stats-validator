@@ -5,8 +5,9 @@
   "main": "./assets/js/index.js",
   "license": "GNU",
   "scripts": {
-    "build": "gulp build",
-    "watch": "gulp browser-sync"
+    "build-dev": "gulp build-dev",
+    "watch": "gulp browser-sync",
+    "start": "gulp build"
   },
   "devDependencies": {
     "browser-sync": "^2.26.14",
@@ -16,11 +17,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
     "gulp-jshint": "^2.1.0",
     "gulp-uglify": "^3.0.2"
-  },
-  "dependencies": {
-    "del": "^6.0.0"
   }
 }

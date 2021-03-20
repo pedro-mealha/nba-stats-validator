@@ -14,21 +14,23 @@ export function validatePlayerStats (playersTableId, teamId, titleId) {
       continue
     }
 
-    for (const stat of stats) {
-      const matchKey = stat.getAttribute('data-match-key')
-      if (matchKey === null || isNaN(parseInt(nbaStats[matchKey], 10))) {
-        continue
-      }
-
-      if (parseInt(nbaStats[matchKey], 10) !== parseInt(stat.innerText, 10)) {
-        errors = true
-        addErrorMessage(stat, nbaStats[matchKey])
-      }
-    }
+    errors |= validateStats(stats, nbaStats)
   }
 
   if (errors) {
     const el = document.getElementById(titleId)
+    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">info</span> ' + el.innerHTML
+  }
+}
+
+export function validateTeamStats (playersTableId, titleId) {
+  const table = document.getElementById(playersTableId)
+  const stats = table.querySelector('tfoot').querySelectorAll('tr')[1].querySelectorAll('td')
+  const nbaStats = fetchNbaTeamStats(playersTableId)
+  const errors = validateStats(stats, nbaStats)
+
+  const el = document.getElementById(titleId)
+  if (errors && !el.hasChildNodes) {
     el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">info</span> ' + el.innerHTML
   }
 }
@@ -59,4 +61,28 @@ function fetchNbaPlayerStats (firstName, lastName, teamId) {
   }
 
   return filterplayers[0]
+}
+
+function fetchNbaTeamStats (playersTableId) {
+  const key = playersTableId.slice(0, 1) + 'Team'
+
+  return window.fileData.gameData.stats[key].totals
+}
+
+function validateStats (stats, nbaStats) {
+  let errors = false
+
+  for (const stat of stats) {
+    const matchKey = stat.getAttribute('data-match-key')
+    if (matchKey === null || isNaN(parseInt(nbaStats[matchKey], 10))) {
+      continue
+    }
+
+    if (parseInt(nbaStats[matchKey], 10) !== parseInt(stat.innerText, 10)) {
+      errors = true
+      addErrorMessage(stat, nbaStats[matchKey])
+    }
+  }
+
+  return errors
 }

@@ -1,4 +1,4 @@
-import { validatePlayerStats } from './validator.js'
+import { validatePlayerStats, validateTeamStats } from './validator.js'
 
 export async function populateHtml (data) {
   document.getElementById('date').innerHTML = data.startsAt.toUTCString()
@@ -35,6 +35,9 @@ export async function populateHtml (data) {
 
   validatePlayerStats('home-players-table', data.teams.home.id, 'home-team-name-players-title')
   validatePlayerStats('visitor-players-table', data.teams.visitor.id, 'visitor-team-name-players-title')
+
+  validateTeamStats('home-players-table', 'home-team-name-players-title')
+  validateTeamStats('visitor-players-table', 'visitor-team-name-players-title')
 
   document.getElementById('open-file-btn').style.display = 'none'
   document.getElementById('content').style.display = 'block'
@@ -83,24 +86,24 @@ function addTeamScores (score, id) {
         <td>TOTALS</td>
         <td></td>
         <td></td>
-        <td>${score.fieldGoalsMade}</td>
-        <td>${score.fieldGoalsAttempts}</td>
-        <td>${score.fieldGoalsPercentage}</td>
-        <td>${score.threePointsMade}</td>
-        <td>${score.threePointsAttempts}</td>
-        <td>${score.threePointsPercentage}</td>
-        <td>${score.freeThrowMade}</td>
-        <td>${score.freeThrowAttempts}</td>
-        <td>${score.freeThrowPercentage}</td>
-        <td>${score.offensiveRebounds}</td>
-        <td>${score.defensiveRebounds}</td>
-        <td>${score.totalRebounds}</td>
-        <td>${score.assists}</td>
-        <td>${score.personalFouls}</td>
-        <td>${score.steals}</td>
-        <td>${score.turnouvers}</td>
-        <td>${score.blocks}</td>
-        <td>${score.points}</td>
+        <td data-match-key="fgm">${score.fieldGoalsMade}</td>
+        <td data-match-key="fga">${score.fieldGoalsAttempts}</td>
+        <td data-match-key="fgp">${score.fieldGoalsPercentage}</td>
+        <td data-match-key="tpm">${score.threePointsMade}</td>
+        <td data-match-key="tpa">${score.threePointsAttempts}</td>
+        <td data-match-key="tpp">${score.threePointsPercentage}</td>
+        <td data-match-key="ftm">${score.freeThrowMade}</td>
+        <td data-match-key="fta">${score.freeThrowAttempts}</td>
+        <td data-match-key="ftp">${score.freeThrowPercentage}</td>
+        <td data-match-key="offReb">${score.offensiveRebounds}</td>
+        <td data-match-key="defReb">${score.defensiveRebounds}</td>
+        <td data-match-key="totReb">${score.totalRebounds}</td>
+        <td data-match-key="assists">${score.assists}</td>
+        <td data-match-key="pFouls">${score.personalFouls}</td>
+        <td data-match-key="steals">${score.steals}</td>
+        <td data-match-key="turnovers">${score.turnouvers}</td>
+        <td data-match-key="blocks">${score.blocks}</td>
+        <td data-match-key="points">${score.points}</td>
       </tr>
     </tfoot>
   `
