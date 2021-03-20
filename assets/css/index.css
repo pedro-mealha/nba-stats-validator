@@ -126,7 +126,7 @@ body {
     border-radius: 11px;
 }
 
-#home-players-table {
+#home-players-table, #visitor-players-table {
     margin-bottom: 0;
 }
 

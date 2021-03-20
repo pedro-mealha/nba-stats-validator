@@ -159,7 +159,7 @@ window.onload = () => {
 
     let teamTwoPlayers = teamTwoPlayersTable.querySelectorAll('tr')
     teamTwoPlayers = [].slice.call(teamTwoPlayers, 3)
-    teamTwoPlayers.splice(-2, 2)
+    teamTwoPlayers.splice(-1, 1)
     teamTwoPlayers = parseStats(teamTwoPlayers)
 
     teams[0].stats = teamOnePlayers[teamOnePlayers.length - 1]

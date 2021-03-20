@@ -23,9 +23,11 @@ export async function populateHtml (data) {
 
   document.getElementById('home-team-name-players-title').innerHTML = data.teams.host.name
   populatePlyersTable(data.teams.host.players, 'home-players-table')
+  addTeamScores(data.teams.host.stats, 'home-players-table')
 
   document.getElementById('visitor-team-name-players-title').innerHTML = data.teams.visitor.name
   populatePlyersTable(data.teams.visitor.players, 'visitor-players-table')
+  addTeamScores(data.teams.visitor.stats, 'visitor-players-table')
 
   document.getElementById('open-file-btn').style.display = 'none'
   document.getElementById('content').style.display = 'block'
@@ -37,7 +39,7 @@ function populatePlyersTable (players, id) {
   for (const player of players) {
     html += `
       <tr>
-        <td>${player.firstName} ${player.lastName}</td>
+        <td>${player.firstName || ''} ${player.lastName || ''}</td>
         <td>${player.position}</td>
         <td>${player.minutes}</td>
         <td>${player.fieldGoalsMade}</td>
@@ -63,4 +65,35 @@ function populatePlyersTable (players, id) {
   }
 
   document.getElementById(id).querySelector('tbody').innerHTML = html
+}
+
+function addTeamScores (score, id) {
+  let html = document.getElementById(id).querySelector('tbody').parentElement.innerHTML
+  html += `
+    <tfoot>
+      <td>TOTALS</td>
+      <td></td>
+      <td></td>
+      <td>${score.fieldGoalsMade}</td>
+      <td>${score.fieldGoalsAttempts}</td>
+      <td>${score.fieldGoalsPercentage}</td>
+      <td>${score.threePointsMade}</td>
+      <td>${score.threePointsAttempts}</td>
+      <td>${score.threePointsPercentage}</td>
+      <td>${score.freeThrowMade}</td>
+      <td>${score.freeThrowAttempts}</td>
+      <td>${score.freeThrowPercentage}</td>
+      <td>${score.offensiveRebounds}</td>
+      <td>${score.defensiveRebounds}</td>
+      <td>${score.totalRebounds}</td>
+      <td>${score.assists}</td>
+      <td>${score.personalFouls}</td>
+      <td>${score.steals}</td>
+      <td>${score.turnouvers}</td>
+      <td>${score.blocks}</td>
+      <td>${score.points}</td>
+    </tfoot>
+  `
+
+  document.getElementById(id).querySelector('tbody').parentElement.innerHTML = html
 }
