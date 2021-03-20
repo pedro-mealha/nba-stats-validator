@@ -22,6 +22,8 @@ export async function populateHtml (data) {
   document.getElementById('visitor-points-3p').innerHTML = data.teams.visitor.score.firstP + data.teams.visitor.score.secondP + data.teams.visitor.score.thirdP || ''
   document.getElementById('home-points-4p').innerHTML = data.teams.home.score.firstP + data.teams.home.score.secondP + data.teams.home.score.thirdP + data.teams.home.score.fourthP || ''
   document.getElementById('visitor-points-4p').innerHTML = data.teams.visitor.score.firstP + data.teams.visitor.score.secondP + data.teams.visitor.score.thirdP + data.teams.visitor.score.fourthP || ''
+  addOverTimeScore(data.teams.home, 'home')
+  addOverTimeScore(data.teams.visitor, 'visitor')
 
   document.getElementById('home-team-name-players-title').innerHTML = data.teams.home.name
   populatePlyersTable(data.teams.home.players, 'home-players-table')
@@ -104,4 +106,23 @@ function addTeamScores (score, id) {
   `
 
   document.getElementById(id).querySelector('tbody').parentElement.innerHTML = html
+}
+
+function addOverTimeScore (team, type) {
+  const currentScore = team.score.firstP + team.score.secondP + team.score.thirdP + team.score.fourthP || ''
+
+  if (team.score.firstOT) {
+    document.getElementById(`${type}-points-first-ot`).innerHTML = currentScore + team.score.firstOT
+    document.getElementById(`${type}-points-first-ot`).parentElement.parentElement.style.display = 'block'
+  }
+
+  if (team.score.secondOT) {
+    document.getElementById(`${type}-points-second-ot`).innerHTML = currentScore + team.score.firstOT + team.score.secondOT
+    document.getElementById(`${type}-points-second-ot`).parentElement.parentElement.style.display = 'block'
+  }
+
+  if (team.score.thirdOT) {
+    document.getElementById(`${type}-points-third-ot`).innerHTML = currentScore + team.score.firstOT + team.score.secondOT + team.score.thirdOT
+    document.getElementById(`${type}-points-third-ot`).parentElement.parentElement.style.display = 'block'
+  }
 }

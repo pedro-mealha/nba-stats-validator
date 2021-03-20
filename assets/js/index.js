@@ -128,23 +128,36 @@ window.onload = () => {
       const teamScore = scoreboardTable.querySelectorAll('tr')[i + 1].children
       const gameLength = teamScore.length
 
-      team.score = { firstP: parseInt(teamScore[2].textContent, 10) }
+      team.score = {
+        firstP: parseInt(teamScore[2].textContent, 10),
+        secondP: undefined,
+        thirdP: undefined,
+        fourthP: undefined,
+        final: parseInt(teamScore[gameLength - 1].textContent, 10)
+      }
 
-      if (gameLength === 5) {
-        team.score.secondP = undefined
-        team.score.thirdP = undefined
-        team.score.fourthP = undefined
-        team.score.final = parseInt(teamScore[4].textContent, 10)
-      } else if (gameLength === 7) {
+      if (gameLength >= 7) {
         team.score.secondP = parseInt(teamScore[4].textContent, 10)
-        team.score.thirdP = undefined
-        team.score.fourthP = undefined
-        team.score.final = parseInt(teamScore[6].textContent, 10)
-      } else {
-        team.score.secondP = parseInt(teamScore[4].textContent, 10)
+      }
+
+      if (gameLength >= 9) {
         team.score.thirdP = parseInt(teamScore[6].textContent, 10)
+      }
+
+      if (gameLength >= 11) {
         team.score.fourthP = parseInt(teamScore[8].textContent, 10)
-        team.score.final = parseInt(teamScore[10].textContent, 10)
+      }
+
+      if (gameLength >= 13) {
+        team.score.firstOT = parseInt(teamScore[10].textContent, 10)
+      }
+
+      if (gameLength >= 15) {
+        team.score.secondOT = parseInt(teamScore[12].textContent, 10)
+      }
+
+      if (gameLength >= 17) {
+        team.score.thirdOT = parseInt(teamScore[14].textContent, 10)
       }
     }
 
