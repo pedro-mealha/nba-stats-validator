@@ -5,7 +5,7 @@ body {
 }
 
 #content {
-    margin: 2% 10% auto 10%;
+    margin: 2% 9% auto 9%;
     display: none;
 }
 
@@ -141,4 +141,17 @@ body {
     background-color: #e5e5e5;
     border-radius: 5px;
     color: #adb5bd;
+}
+
+.cell-danger {
+    --bs-table-bg: #f8d7da !important;
+    --bs-table-accent-bg: #f8d7da !important;
+    --bs-table-striped-bg: #eccccf !important;
+    --bs-table-striped-color: #000 !important;
+    --bs-table-active-bg: #dfc2c4 !important;
+    --bs-table-active-color: #000 !important;
+    --bs-table-hover-bg: #e5c7ca !important;
+    --bs-table-hover-color: #000 !important;
+    color: #000 !important;
+    border-color: #dfc2c4 !important;
 }

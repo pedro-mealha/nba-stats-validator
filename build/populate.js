@@ -1,52 +1,52 @@
-async function populateHtml(e){document.getElementById("date").innerHTML=e.startsAt.toUTCString(),document.getElementById("location").innerHTML=e.location,document.getElementById("home-logo").src=e.teams.home.logo,document.getElementById("home-team-name").innerHTML=e.teams.home.name,document.getElementById("home-team-tricode").innerHTML=e.teams.home.triCode,document.getElementById("visitor-logo").src=e.teams.visitor.logo,document.getElementById("visitor-team-name").innerHTML=e.teams.visitor.name,document.getElementById("visitor-team-tricode").innerHTML=e.teams.visitor.triCode,document.getElementById("home-team-points").innerHTML=e.teams.home.score.final,document.getElementById("visitor-team-points").innerHTML=e.teams.visitor.score.final,document.getElementById("home-points-1p").innerHTML=e.teams.home.score.firstP,document.getElementById("visitor-points-1p").innerHTML=e.teams.visitor.score.firstP,document.getElementById("home-points-2p").innerHTML=e.teams.home.score.firstP+e.teams.home.score.secondP||"",document.getElementById("visitor-points-2p").innerHTML=e.teams.visitor.score.firstP+e.teams.visitor.score.secondP||"",document.getElementById("home-points-3p").innerHTML=e.teams.home.score.firstP+e.teams.home.score.secondP+e.teams.home.score.thirdP||"",document.getElementById("visitor-points-3p").innerHTML=e.teams.visitor.score.firstP+e.teams.visitor.score.secondP+e.teams.visitor.score.thirdP||"",document.getElementById("home-points-4p").innerHTML=e.teams.home.score.firstP+e.teams.home.score.secondP+e.teams.home.score.thirdP+e.teams.home.score.fourthP||"",document.getElementById("visitor-points-4p").innerHTML=e.teams.visitor.score.firstP+e.teams.visitor.score.secondP+e.teams.visitor.score.thirdP+e.teams.visitor.score.fourthP||"",document.getElementById("home-team-name-players-title").innerHTML=e.teams.home.name,populatePlyersTable(e.teams.home.players,"home-players-table"),addTeamScores(e.teams.home.stats,"home-players-table"),document.getElementById("visitor-team-name-players-title").innerHTML=e.teams.visitor.name,populatePlyersTable(e.teams.visitor.players,"visitor-players-table"),addTeamScores(e.teams.visitor.stats,"visitor-players-table"),document.getElementById("open-file-btn").style.display="none",document.getElementById("content").style.display="block"}function populatePlyersTable(e,t){let o="";for(const s of e)o+=`
+import{validatePlayerStats as validatePlayerStats}from"./validator.js";async function populateHtml(t){document.getElementById("date").innerHTML=t.startsAt.toUTCString(),document.getElementById("location").innerHTML=t.location,document.getElementById("home-logo").src=t.teams.home.logo,document.getElementById("home-team-name").innerHTML=t.teams.home.name,document.getElementById("home-team-tricode").innerHTML=t.teams.home.triCode,document.getElementById("visitor-logo").src=t.teams.visitor.logo,document.getElementById("visitor-team-name").innerHTML=t.teams.visitor.name,document.getElementById("visitor-team-tricode").innerHTML=t.teams.visitor.triCode,document.getElementById("home-team-points").innerHTML=t.teams.home.score.final,document.getElementById("visitor-team-points").innerHTML=t.teams.visitor.score.final,document.getElementById("home-points-1p").innerHTML=t.teams.home.score.firstP,document.getElementById("visitor-points-1p").innerHTML=t.teams.visitor.score.firstP,document.getElementById("home-points-2p").innerHTML=t.teams.home.score.firstP+t.teams.home.score.secondP||"",document.getElementById("visitor-points-2p").innerHTML=t.teams.visitor.score.firstP+t.teams.visitor.score.secondP||"",document.getElementById("home-points-3p").innerHTML=t.teams.home.score.firstP+t.teams.home.score.secondP+t.teams.home.score.thirdP||"",document.getElementById("visitor-points-3p").innerHTML=t.teams.visitor.score.firstP+t.teams.visitor.score.secondP+t.teams.visitor.score.thirdP||"",document.getElementById("home-points-4p").innerHTML=t.teams.home.score.firstP+t.teams.home.score.secondP+t.teams.home.score.thirdP+t.teams.home.score.fourthP||"",document.getElementById("visitor-points-4p").innerHTML=t.teams.visitor.score.firstP+t.teams.visitor.score.secondP+t.teams.visitor.score.thirdP+t.teams.visitor.score.fourthP||"",document.getElementById("home-team-name-players-title").innerHTML=t.teams.home.name,populatePlyersTable(t.teams.home.players,"home-players-table"),addTeamScores(t.teams.home.stats,"home-players-table"),document.getElementById("visitor-team-name-players-title").innerHTML=t.teams.visitor.name,populatePlyersTable(t.teams.visitor.players,"visitor-players-table"),addTeamScores(t.teams.visitor.stats,"visitor-players-table"),validatePlayerStats("home-players-table",t.teams.home.id,"home-team-name-players-title"),validatePlayerStats("visitor-players-table",t.teams.visitor.id,"visitor-team-name-players-title"),document.getElementById("open-file-btn").style.display="none",document.getElementById("content").style.display="block"}function populatePlyersTable(t,e){let o="";for(const a of t)o+=`
       <tr>
-        <td>${s.firstName||""} ${s.lastName||""}</td>
-        <td>${s.position}</td>
-        <td>${s.minutes}</td>
-        <td>${s.fieldGoalsMade}</td>
-        <td>${s.fieldGoalsAttempts}</td>
-        <td>${s.fieldGoalsPercentage}</td>
-        <td>${s.threePointsMade}</td>
-        <td>${s.threePointsAttempts}</td>
-        <td>${s.threePointsPercentage}</td>
-        <td>${s.freeThrowMade}</td>
-        <td>${s.freeThrowAttempts}</td>
-        <td>${s.freeThrowPercentage}</td>
-        <td>${s.offensiveRebounds}</td>
-        <td>${s.defensiveRebounds}</td>
-        <td>${s.totalRebounds}</td>
-        <td>${s.assists}</td>
-        <td>${s.personalFouls}</td>
-        <td>${s.steals}</td>
-        <td>${s.turnouvers}</td>
-        <td>${s.blocks}</td>
-        <td>${s.points}</td>
+        <td data-first-name="${a.firstName}" data-last-name="${a.lastName}">${a.firstName} ${a.lastName}</td>
+        <td>${a.position}</td>
+        <td>${a.minutes}</td>
+        <td data-match-key="fgm">${a.fieldGoalsMade}</td>
+        <td data-match-key="fga">${a.fieldGoalsAttempts}</td>
+        <td data-match-key="fgp">${a.fieldGoalsPercentage}</td>
+        <td data-match-key="tpm">${a.threePointsMade}</td>
+        <td data-match-key="tpa">${a.threePointsAttempts}</td>
+        <td data-match-key="tpp">${a.threePointsPercentage}</td>
+        <td data-match-key="ftm">${a.freeThrowMade}</td>
+        <td data-match-key="fta">${a.freeThrowAttempts}</td>
+        <td data-match-key="ftp">${a.freeThrowPercentage}</td>
+        <td data-match-key="offReb">${a.offensiveRebounds}</td>
+        <td data-match-key="defReb">${a.defensiveRebounds}</td>
+        <td data-match-key="totReb">${a.totalRebounds}</td>
+        <td data-match-key="assists">${a.assists}</td>
+        <td data-match-key="pFouls">${a.personalFouls}</td>
+        <td data-match-key="steals">${a.steals}</td>
+        <td data-match-key="turnovers">${a.turnouvers}</td>
+        <td data-match-key="blocks">${a.blocks}</td>
+        <td data-match-key="points">${a.points}</td>
       </tr>
-    `;document.getElementById(t).querySelector("tbody").innerHTML=o}function addTeamScores(e,t){var o=document.getElementById(t).querySelector("tbody").parentElement.innerHTML;o+=`
+    `;document.getElementById(e).querySelector("tbody").innerHTML=o}function addTeamScores(t,e){var o=document.getElementById(e).querySelector("tbody").parentElement.innerHTML;o+=`
     <tfoot>
       <tr style="height:3px;"></tr>
       <tr>
         <td>TOTALS</td>
         <td></td>
         <td></td>
-        <td>${e.fieldGoalsMade}</td>
-        <td>${e.fieldGoalsAttempts}</td>
-        <td>${e.fieldGoalsPercentage}</td>
-        <td>${e.threePointsMade}</td>
-        <td>${e.threePointsAttempts}</td>
-        <td>${e.threePointsPercentage}</td>
-        <td>${e.freeThrowMade}</td>
-        <td>${e.freeThrowAttempts}</td>
-        <td>${e.freeThrowPercentage}</td>
-        <td>${e.offensiveRebounds}</td>
-        <td>${e.defensiveRebounds}</td>
-        <td>${e.totalRebounds}</td>
-        <td>${e.assists}</td>
-        <td>${e.personalFouls}</td>
-        <td>${e.steals}</td>
-        <td>${e.turnouvers}</td>
-        <td>${e.blocks}</td>
-        <td>${e.points}</td>
+        <td>${t.fieldGoalsMade}</td>
+        <td>${t.fieldGoalsAttempts}</td>
+        <td>${t.fieldGoalsPercentage}</td>
+        <td>${t.threePointsMade}</td>
+        <td>${t.threePointsAttempts}</td>
+        <td>${t.threePointsPercentage}</td>
+        <td>${t.freeThrowMade}</td>
+        <td>${t.freeThrowAttempts}</td>
+        <td>${t.freeThrowPercentage}</td>
+        <td>${t.offensiveRebounds}</td>
+        <td>${t.defensiveRebounds}</td>
+        <td>${t.totalRebounds}</td>
+        <td>${t.assists}</td>
+        <td>${t.personalFouls}</td>
+        <td>${t.steals}</td>
+        <td>${t.turnouvers}</td>
+        <td>${t.blocks}</td>
+        <td>${t.points}</td>
       </tr>
     </tfoot>
-  `,document.getElementById(t).querySelector("tbody").parentElement.innerHTML=o}export{populateHtml as populateHtml};
+  `,document.getElementById(e).querySelector("tbody").parentElement.innerHTML=o}export{populateHtml as populateHtml};

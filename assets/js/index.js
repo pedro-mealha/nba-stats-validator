@@ -177,23 +177,23 @@ window.onload = () => {
     const parsedStats = []
     for (const stat of stats) {
       const [
-        name,                    // Player Name
-        position,                // POS
-        minutes,                 // MIN
-        fieldGoalMadeAttempts,   // FGM-A
-        threePointsMadeAttempts, // 3PM-A
-        freeThrowMadeAttempts,   // FTM-A
-        offensiveRebounds,       // OFF
-        defensiveRebounds,       // DEF
-        totalRebounds,           // TOT
-        assists,                 // AST
-        ,                        // FR
-        personalFouls,           // PF
-        steals,                  // ST
-        turnouvers,              // TO
-        blocks,                  // BS
-        points,                  // PTS
-                                 // +/-
+        name,
+        position,
+        minutes,
+        fieldGoalMadeAttempts,
+        threePointsMadeAttempts,
+        freeThrowMadeAttempts,
+        offensiveRebounds,
+        defensiveRebounds,
+        totalRebounds,
+        assists,
+        , // FR
+        personalFouls,
+        steals,
+        turnouvers,
+        blocks,
+        points,
+        // +/-
       ] = stat.querySelectorAll('td')
 
       const [lastName, firstName] = name.textContent.split(',')
@@ -208,8 +208,8 @@ window.onload = () => {
       const freeThrowPercentage = +(parseInt(freeThrowMade, 10) / parseInt(freeThrowAttempts, 10) * 100).toFixed(2) || 0
 
       parsedStats.push({
-        firstName,
-        lastName,
+        firstName: firstName || '',
+        lastName: lastName || '',
         position: position.textContent.trim(),
         minutes: minutes.textContent.trim(),
         fieldGoalsMade: parseInt(fieldGoalsMade, 10),
