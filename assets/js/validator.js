@@ -19,7 +19,7 @@ export function validatePlayerStats (playersTableId, teamId, titleId) {
 
   if (errors) {
     const el = document.getElementById(titleId)
-    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">info</span> ' + el.innerHTML
+    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">report_problem</span> ' + el.innerHTML
   }
 }
 
@@ -31,7 +31,7 @@ export function validateTeamStats (playersTableId, titleId) {
 
   const el = document.getElementById(titleId)
   if (errors && !el.hasChildNodes) {
-    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">info</span> ' + el.innerHTML
+    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">report_problem</span> ' + el.innerHTML
   }
 }
 
@@ -79,7 +79,7 @@ function validateStats (stats, nbaStats) {
     }
 
     if (parseInt(nbaStats[matchKey], 10) !== parseInt(stat.innerText, 10)) {
-      errors = true
+      errors |= true
       addErrorMessage(stat, nbaStats[matchKey])
     }
   }

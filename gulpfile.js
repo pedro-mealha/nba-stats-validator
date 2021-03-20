@@ -2,14 +2,10 @@ const gulp = require('gulp')
 const uglify = require('gulp-uglify')
 const rename = require('gulp-rename')
 const clean = require('gulp-clean')
-try {
-  const browserSync = require('browser-sync')
-} catch (ex) {
-  const browserSync = null
-}
+const browserSync = require('browser-sync')
 
 gulp.task('build', function () {
-  return gulp.src('./assets/js/*.js', { read: false })
+  return gulp.src('./assets/js/*.js')
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
     .pipe(clean())
