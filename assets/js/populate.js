@@ -2,28 +2,28 @@ export async function populateHtml (data) {
   document.getElementById('date').innerHTML = data.startsAt.toUTCString()
   document.getElementById('location').innerHTML = data.location
 
-  document.getElementById('host-logo').src = data.teams.host.logo
-  document.getElementById('host-team-name').innerHTML = data.teams.host.name
-  document.getElementById('host-team-tricode').innerHTML = data.teams.host.triCode
+  document.getElementById('home-logo').src = data.teams.home.logo
+  document.getElementById('home-team-name').innerHTML = data.teams.home.name
+  document.getElementById('home-team-tricode').innerHTML = data.teams.home.triCode
   document.getElementById('visitor-logo').src = data.teams.visitor.logo
   document.getElementById('visitor-team-name').innerHTML = data.teams.visitor.name
   document.getElementById('visitor-team-tricode').innerHTML = data.teams.visitor.triCode
 
-  document.getElementById('host-team-points').innerHTML = data.teams.host.score.final
+  document.getElementById('home-team-points').innerHTML = data.teams.home.score.final
   document.getElementById('visitor-team-points').innerHTML = data.teams.visitor.score.final
 
-  document.getElementById('host-points-1p').innerHTML = data.teams.host.score.firstP
+  document.getElementById('home-points-1p').innerHTML = data.teams.home.score.firstP
   document.getElementById('visitor-points-1p').innerHTML = data.teams.visitor.score.firstP
-  document.getElementById('host-points-2p').innerHTML = data.teams.host.score.firstP + data.teams.host.score.secondP || ''
+  document.getElementById('home-points-2p').innerHTML = data.teams.home.score.firstP + data.teams.home.score.secondP || ''
   document.getElementById('visitor-points-2p').innerHTML = data.teams.visitor.score.firstP + data.teams.visitor.score.secondP || ''
-  document.getElementById('host-points-3p').innerHTML = data.teams.host.score.firstP + data.teams.host.score.secondP + data.teams.host.score.thirdP || ''
+  document.getElementById('home-points-3p').innerHTML = data.teams.home.score.firstP + data.teams.home.score.secondP + data.teams.home.score.thirdP || ''
   document.getElementById('visitor-points-3p').innerHTML = data.teams.visitor.score.firstP + data.teams.visitor.score.secondP + data.teams.visitor.score.thirdP || ''
-  document.getElementById('host-points-4p').innerHTML = data.teams.host.score.firstP + data.teams.host.score.secondP + data.teams.host.score.thirdP + data.teams.host.score.fourthP || ''
+  document.getElementById('home-points-4p').innerHTML = data.teams.home.score.firstP + data.teams.home.score.secondP + data.teams.home.score.thirdP + data.teams.home.score.fourthP || ''
   document.getElementById('visitor-points-4p').innerHTML = data.teams.visitor.score.firstP + data.teams.visitor.score.secondP + data.teams.visitor.score.thirdP + data.teams.visitor.score.fourthP || ''
 
-  document.getElementById('home-team-name-players-title').innerHTML = data.teams.host.name
-  populatePlyersTable(data.teams.host.players, 'home-players-table')
-  addTeamScores(data.teams.host.stats, 'home-players-table')
+  document.getElementById('home-team-name-players-title').innerHTML = data.teams.home.name
+  populatePlyersTable(data.teams.home.players, 'home-players-table')
+  addTeamScores(data.teams.home.stats, 'home-players-table')
 
   document.getElementById('visitor-team-name-players-title').innerHTML = data.teams.visitor.name
   populatePlyersTable(data.teams.visitor.players, 'visitor-players-table')
@@ -71,27 +71,30 @@ function addTeamScores (score, id) {
   let html = document.getElementById(id).querySelector('tbody').parentElement.innerHTML
   html += `
     <tfoot>
-      <td>TOTALS</td>
-      <td></td>
-      <td></td>
-      <td>${score.fieldGoalsMade}</td>
-      <td>${score.fieldGoalsAttempts}</td>
-      <td>${score.fieldGoalsPercentage}</td>
-      <td>${score.threePointsMade}</td>
-      <td>${score.threePointsAttempts}</td>
-      <td>${score.threePointsPercentage}</td>
-      <td>${score.freeThrowMade}</td>
-      <td>${score.freeThrowAttempts}</td>
-      <td>${score.freeThrowPercentage}</td>
-      <td>${score.offensiveRebounds}</td>
-      <td>${score.defensiveRebounds}</td>
-      <td>${score.totalRebounds}</td>
-      <td>${score.assists}</td>
-      <td>${score.personalFouls}</td>
-      <td>${score.steals}</td>
-      <td>${score.turnouvers}</td>
-      <td>${score.blocks}</td>
-      <td>${score.points}</td>
+      <tr style="height:3px;"></tr>
+      <tr>
+        <td>TOTALS</td>
+        <td></td>
+        <td></td>
+        <td>${score.fieldGoalsMade}</td>
+        <td>${score.fieldGoalsAttempts}</td>
+        <td>${score.fieldGoalsPercentage}</td>
+        <td>${score.threePointsMade}</td>
+        <td>${score.threePointsAttempts}</td>
+        <td>${score.threePointsPercentage}</td>
+        <td>${score.freeThrowMade}</td>
+        <td>${score.freeThrowAttempts}</td>
+        <td>${score.freeThrowPercentage}</td>
+        <td>${score.offensiveRebounds}</td>
+        <td>${score.defensiveRebounds}</td>
+        <td>${score.totalRebounds}</td>
+        <td>${score.assists}</td>
+        <td>${score.personalFouls}</td>
+        <td>${score.steals}</td>
+        <td>${score.turnouvers}</td>
+        <td>${score.blocks}</td>
+        <td>${score.points}</td>
+      </tr>
     </tfoot>
   `
 

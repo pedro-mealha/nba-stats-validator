@@ -14,11 +14,11 @@ body {
     margin-right: 15%;
 }
 
-#visitor-team-name-players-title, #home-team-name-players-title, #host-team-name, #visitor-team-name:first-letter {
+#visitor-team-name-players-title, #home-team-name-players-title, #home-team-name, #visitor-team-name:first-letter {
     text-transform:capitalize;
 }
 
-#host-team-points, #visitor-team-points {
+#home-team-points, #visitor-team-points {
     font-size: 1.6em;
 }
 

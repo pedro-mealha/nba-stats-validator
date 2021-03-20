@@ -244,16 +244,16 @@ window.onload = () => {
       parsedTeams.visitor = teams[0]
 
       teams[1].id = gameData.basicGameData.hTeam.teamId
-      parsedTeams.host = teams[1]
+      parsedTeams.home = teams[1]
     } else {
       teams[1].id = gameData.basicGameData.vTeam.teamId
       parsedTeams.visitor = teams[1]
 
       teams[0].id = gameData.basicGameData.hTeam.teamId
-      parsedTeams.host = teams[0]
+      parsedTeams.home = teams[0]
     }
 
-    parsedTeams.host.logo = getTeamLogo(parsedTeams.host.id)
+    parsedTeams.home.logo = getTeamLogo(parsedTeams.home.id)
     parsedTeams.visitor.logo = getTeamLogo(parsedTeams.visitor.id)
 
     return parsedTeams
