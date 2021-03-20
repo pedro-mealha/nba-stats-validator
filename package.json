@@ -9,21 +9,18 @@
   },
   "scripts": {
     "build-dev": "gulp build-dev",
-    "watch": "npm build-dev && gulp browser-sync",
+    "watch": "gulp build-dev && gulp browser-sync",
     "build": "gulp build"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.14",
     "eslint": "^7.22.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1"
-  },
-  "dependencies": {
+    "eslint-plugin-promise": "^4.3.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-uglify": "^3.0.2",
-    "browser-sync": "^2.26.14"
+    "gulp-uglify": "^3.0.2"
   }
 }
