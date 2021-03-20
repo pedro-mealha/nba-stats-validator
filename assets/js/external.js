@@ -1,4 +1,4 @@
-import * as config from './../env.js'
+import * as config from './../../env.js'
 
 export async function getGameId (date, teams) {
   return httpGet(`${date}/scoreboard.json`)
@@ -21,7 +21,7 @@ export async function getGameData (date, gameId) {
     })
 }
 
-export function getTeamLogo (teamId) {
+export function getTeamLogo(teamId) {
   const url = config.default.nba_logo_url
   return url.replace('{teamId}', teamId)
 }
