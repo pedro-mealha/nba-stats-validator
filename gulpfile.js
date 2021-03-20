@@ -2,7 +2,11 @@ const gulp = require('gulp')
 const uglify = require('gulp-uglify')
 const rename = require('gulp-rename')
 const clean = require('gulp-clean')
-const browserSync = require('browser-sync')
+try {
+  const browserSync = require('browser-sync')
+} catch (ex) {
+  const browserSync = null
+}
 
 gulp.task('build', function () {
   return gulp.src('./assets/js/*.js', { read: false })
