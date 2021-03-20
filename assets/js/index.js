@@ -258,4 +258,46 @@ window.onload = () => {
 
     return parsedTeams
   }
+
+  document.getElementById('home-team-name-players-title').parentElement.onclick = function () {
+    if (this.classList.contains('active-tab')) {
+      deactivateTab(this)
+      activeTab(document.getElementById('visitor-team-name-players-title').parentElement)
+
+      document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'none'
+      document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'block'
+    } else {
+      activeTab(this)
+      deactivateTab(document.getElementById('visitor-team-name-players-title').parentElement)
+
+      document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'none'
+      document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'block'
+    }
+  }
+
+  document.getElementById('visitor-team-name-players-title').parentElement.onclick = function () {
+    if (this.classList.contains('active-tab')) {
+      deactivateTab(this)
+      activeTab(document.getElementById('home-team-name-players-title').parentElement)
+
+      document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'none'
+      document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'block'
+    } else {
+      activeTab(this)
+      deactivateTab(document.getElementById('home-team-name-players-title').parentElement)
+
+      document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'none'
+      document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'block'
+    }
+  }
+
+  function activeTab (element) {
+    element.classList.add('active-tab')
+    element.classList.remove('deactive-tab')
+  }
+
+  function deactivateTab (element) {
+    element.classList.remove('active-tab')
+    element.classList.add('deactive-tab')
+  }
 }

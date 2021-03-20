@@ -14,7 +14,7 @@ body {
     margin-right: 15%;
 }
 
-#host-team-name, #visitor-team-name:first-letter {
+#visitor-team-name-players-title, #home-team-name-players-title, #host-team-name, #visitor-team-name:first-letter {
     text-transform:capitalize;
 }
 
@@ -112,4 +112,33 @@ body {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
+}
+
+.thead-light th {
+    color: #373a3c;
+    background-color: #fff;
+}
+
+.table-rounded {
+    overflow: hidden;
+    padding: 0;
+    border-color: #373b3e;
+    border-radius: 11px;
+}
+
+#home-players-table {
+    margin-bottom: 0;
+}
+
+.active-tab {
+    cursor: pointer;
+    background-color: #000814;
+    border-radius: 5px;
+}
+
+.deactive-tab {
+    cursor: pointer;
+    background-color: #e5e5e5;
+    border-radius: 5px;
+    color: #adb5bd;
 }
