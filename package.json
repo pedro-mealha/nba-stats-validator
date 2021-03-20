@@ -10,8 +10,7 @@
   "scripts": {
     "build-dev": "gulp build-dev",
     "watch": "npm build-dev && gulp browser-sync",
-    "build": "gulp build",
-    "postinstall": "gulp build"
+    "build": "gulp build"
   },
   "devDependencies": {
     "eslint": "^7.22.0",

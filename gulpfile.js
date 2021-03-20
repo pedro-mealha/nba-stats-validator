@@ -6,9 +6,9 @@ const browserSync = require('browser-sync')
 
 gulp.task('build', function () {
   return gulp.src('./assets/js/*.js')
+    .pipe(clean(), { force: true })
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
-    .pipe(clean())
     .pipe(gulp.dest('build'))
 })
 
