@@ -12,6 +12,9 @@ window.onload = () => {
   }
 
   input.onchange = e => {
+    document.getElementById('open-file-btn').classList.add('d-none')
+    document.getElementById('loading').classList.remove('d-none')
+
     const file = e.target.files[0]
     const filename = file.name.replace('.htm', '')
     const reader = new FileReader()

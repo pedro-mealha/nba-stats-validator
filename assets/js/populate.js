@@ -39,7 +39,7 @@ export async function populateHtml (data) {
   validateTeamStats('home-players-table', 'home-team-name-players-title')
   validateTeamStats('visitor-players-table', 'visitor-team-name-players-title')
 
-  document.getElementById('open-file-btn').style.display = 'none'
+  document.getElementById('loading').classList.add('d-none')
   document.getElementById('content').style.display = 'block'
 }
 
