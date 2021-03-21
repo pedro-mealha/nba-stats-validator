@@ -10,7 +10,7 @@ A small website to validate your own nba game statistics with nba.com statistics
 
 The way this works is, you upload you HTM file, the app will parse it and display it to you and then we will run the parse data against the nba.com data. If any player has a statistics incorrect we will highlight it and show you the correct value -- the one that nba.com has.
 
-For now this only works with one specific file scheme. See [Examples](examples/README.md).
+For now this only works with one specific file scheme. See [Examples](examples/).
 
 ## NBA data
 
@@ -94,7 +94,7 @@ You can have automatic builds whenever a file is changed. This will make webpack
 npm run watch
 ```
 
-To test the app use the files in the [`/examples dir`]('examples/README.md').
+To test the app use the files in the [`/examples dir`]('examples/').
 
 # License
 
