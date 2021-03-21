@@ -28,10 +28,12 @@ export async function populateHtml (data) {
   document.getElementById('home-team-name-players-title').innerHTML = data.teams.home.name
   populatePlyersTable(data.teams.home.players, 'home-players-table')
   addTeamScores(data.teams.home.stats, 'home-players-table')
+  addTeamSecondaryScores(data.teams.home.stats, 'home-players-table')
 
   document.getElementById('visitor-team-name-players-title').innerHTML = data.teams.visitor.name
   populatePlyersTable(data.teams.visitor.players, 'visitor-players-table')
   addTeamScores(data.teams.visitor.stats, 'visitor-players-table')
+  addTeamSecondaryScores(data.teams.visitor.stats, 'visitor-players-table')
 
   validatePlayerStats('home-players-table', data.teams.home.id, 'home-team-name-players-title')
   validatePlayerStats('visitor-players-table', data.teams.visitor.id, 'visitor-team-name-players-title')
@@ -109,6 +111,38 @@ function addTeamScores (score, id) {
   `
 
   document.getElementById(id).querySelector('tbody').parentElement.innerHTML = html
+}
+
+function addTeamSecondaryScores (score, id) {
+  let html = document.getElementById(id).querySelector('tfoot').innerHTML
+  html += `
+      <tr>
+        <td>TEAM</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td data-match-key="teamReb">${score.teamRebounds}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td data-match-key="turnovers">${score.teamTurnovers}</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
+  `
+
+  document.getElementById(id).querySelector('tfoot').innerHTML = html
 }
 
 function addOverTimeScore (team, type) {

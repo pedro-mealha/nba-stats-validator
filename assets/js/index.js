@@ -170,19 +170,23 @@ window.onload = () => {
   function addPlayers (teams, teamOnePlayersTable, teamTwoPlayersTable) {
     let teamOnePlayers = teamOnePlayersTable.querySelectorAll('tr')
     teamOnePlayers = [].slice.call(teamOnePlayers, 3)
+    const teamOneSecondaryStats = teamOnePlayers[teamOnePlayers.length - 1]
     teamOnePlayers.splice(-1, 1)
     teamOnePlayers = parseStats(teamOnePlayers)
 
     let teamTwoPlayers = teamTwoPlayersTable.querySelectorAll('tr')
     teamTwoPlayers = [].slice.call(teamTwoPlayers, 3)
+    const teamTwoSecondaryStats = teamTwoPlayers[teamTwoPlayers.length - 1]
     teamTwoPlayers.splice(-1, 1)
     teamTwoPlayers = parseStats(teamTwoPlayers)
 
     teams[0].stats = teamOnePlayers[teamOnePlayers.length - 1]
+    teams[0].stats = addSecondaryStats(teams[0].stats, teamOneSecondaryStats)
     teamOnePlayers.splice(-1, 1)
     teams[0].players = teamOnePlayers
 
     teams[1].stats = teamTwoPlayers[teamTwoPlayers.length - 1]
+    teams[1].stats = addSecondaryStats(teams[1].stats, teamTwoSecondaryStats)
     teamTwoPlayers.splice(-1, 1)
     teams[1].players = teamTwoPlayers
 
@@ -252,6 +256,14 @@ window.onload = () => {
     return parsedStats
   }
 
+  function addSecondaryStats (stats, secondaryStats) {
+    const elements = secondaryStats.querySelectorAll('td')
+    stats.teamRebounds = elements[7].innerText || '-'
+    stats.teamTurnovers = elements[10].innerText || '-'
+
+    return stats
+  }
+
   function updateTeamData (teams, gameData) {
     const parsedTeams = {}
 
@@ -282,7 +294,7 @@ window.onload = () => {
 
       document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'none'
       document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'block'
-    } else {
+    } else if (this.classList.contains('deactive-tab')) {
       activeTab(this)
       deactivateTab(document.getElementById('visitor-team-name-players-title').parentElement)
 
@@ -298,7 +310,7 @@ window.onload = () => {
 
       document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'none'
       document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'block'
-    } else {
+    } else if (this.classList.contains('deactive-tab')) {
       activeTab(this)
       deactivateTab(document.getElementById('home-team-name-players-title').parentElement)
 
