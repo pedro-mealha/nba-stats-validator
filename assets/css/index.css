@@ -1,3 +1,8 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
     background-color: #17408B;
@@ -5,7 +10,7 @@ body {
 }
 
 #content {
-    margin: 2% 9% auto 9%;
+    margin: 2% 9% 7% 9%;
     display: none;
 }
 
@@ -164,4 +169,39 @@ body {
     50% {
         opacity: 0;
     }
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 1%;
+    padding-bottom: 1%;
+}
+
+footer .github-link:link, footer .github-link:visited {
+    text-decoration: underline;
+    color: white;
+}
+
+footer .github-link{
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background-size: 200% 200%;
+  animation: rainbow 2s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip:text;
+  transition: color .2s ease-in-out;
+}
+
+footer .github-link:hover{
+  color:rgba(0, 0, 0, 0);
+}
+
+@keyframes rainbow { 
+  0%{background-position:left}
+  50%{background-position:right}
+  100%{background-position:left}
 }
