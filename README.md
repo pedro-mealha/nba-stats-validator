@@ -4,7 +4,7 @@
 
 ***Live URL:*** https://nba-stats-validator.herokuapp.com  
 
-***Tech tack***: HTML, CSS, vanilla JS, Bootstrap, Google Fonts, Google Icons, NPM, Webpack, Heroku, ESLINT
+***Tech stack***: HTML, CSS, vanilla JS, Bootstrap, Google Fonts, Google Icons, NPM, Webpack, Heroku, ESLINT
 
 A small website to validate your own nba game statistics with nba.com statistics.
 
