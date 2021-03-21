@@ -299,13 +299,7 @@ window.onload = () => {
   }
 
   document.getElementById('home-team-name-players-title').parentElement.onclick = function () {
-    if (this.classList.contains('active-tab')) {
-      deactivateTab(this)
-      activeTab(document.getElementById('visitor-team-name-players-title').parentElement)
-
-      document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'none'
-      document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'block'
-    } else if (this.classList.contains('deactive-tab')) {
+    if (this.classList.contains('deactive-tab')) {
       activeTab(this)
       deactivateTab(document.getElementById('visitor-team-name-players-title').parentElement)
 
@@ -315,13 +309,7 @@ window.onload = () => {
   }
 
   document.getElementById('visitor-team-name-players-title').parentElement.onclick = function () {
-    if (this.classList.contains('active-tab')) {
-      deactivateTab(this)
-      activeTab(document.getElementById('home-team-name-players-title').parentElement)
-
-      document.getElementById('visitor-players-table').parentElement.parentElement.parentElement.style.display = 'none'
-      document.getElementById('home-players-table').parentElement.parentElement.parentElement.style.display = 'block'
-    } else if (this.classList.contains('deactive-tab')) {
+    if (this.classList.contains('deactive-tab')) {
       activeTab(this)
       deactivateTab(document.getElementById('home-team-name-players-title').parentElement)
 
