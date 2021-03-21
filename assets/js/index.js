@@ -12,6 +12,8 @@ window.onload = () => {
   }
 
   input.onchange = e => {
+    document.getElementById('content').style.display = 'none'
+    document.getElementsByTagName('footer')[0].style.bottom = 0
     document.getElementById('open-file-btn').classList.add('d-none')
     document.getElementById('loading').classList.remove('d-none')
 
@@ -339,5 +341,13 @@ window.onload = () => {
     document.getElementById('team-inputs').classList.add('d-none')
 
     parseFileHtml(window.rawFileData, newFileName)
+  }
+
+  document.onkeyup = function (e) {
+    const evt = window.event || e
+    // ctrl + 'n' key
+    if (evt.ctrlKey && evt.keyCode === 78) {
+      input.click()
+    }
   }
 }

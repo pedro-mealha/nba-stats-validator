@@ -43,6 +43,7 @@ export async function populateHtml (data) {
 
   document.getElementById('loading').classList.add('d-none')
   document.getElementById('content').style.display = 'block'
+  document.getElementsByTagName('footer')[0].style.bottom = ''
 }
 
 function populatePlyersTable (players, id) {
@@ -80,9 +81,7 @@ function populatePlyersTable (players, id) {
 }
 
 function addTeamScores (score, id) {
-  let html = document.getElementById(id).querySelector('tbody').parentElement.innerHTML
-  html += `
-    <tfoot>
+  const html = `
       <tr style="height:3px;"></tr>
       <tr>
         <td>TOTALS</td>
@@ -107,10 +106,9 @@ function addTeamScores (score, id) {
         <td data-match-key="blocks">${score.blocks}</td>
         <td data-match-key="points">${score.points}</td>
       </tr>
-    </tfoot>
   `
 
-  document.getElementById(id).querySelector('tbody').parentElement.innerHTML = html
+  document.getElementById(id).querySelector('tfoot').innerHTML = html
 }
 
 function addTeamSecondaryScores (score, id) {

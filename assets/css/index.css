@@ -1,6 +1,6 @@
 html {
     min-height: 100%;
-    position: relative;
+    /* position: relative; */
 }
 
 body {
@@ -10,7 +10,7 @@ body {
 }
 
 #content {
-    margin: 2% 9% 7% 9%;
+    margin: 2% 9% 5% 9%;
     display: none;
 }
 
@@ -183,11 +183,9 @@ body {
 footer {
     position: absolute;
     left: 0;
-    bottom: 0;
     width: 100%;
     text-align: center;
     font-size: 0.8em;
-    margin-top: 1%;
     padding-bottom: 1%;
 }
 
