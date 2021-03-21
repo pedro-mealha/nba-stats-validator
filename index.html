@@ -31,6 +31,25 @@
         <p class="text-center loading" style="font-size: 1.5em;">Loading ...</p>
     </div>
 
+    <div id="team-inputs" class="center d-none">
+        <form id="teams-txt-form">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Away</span>
+                </div>
+                <input style="margin-right: 5%;text-transform:uppercase" id="visitor-team-tri-text" type="text" required size="10" maxlength="3" minlength="3" pattern="[A-Za-z]{3}" title="Away team tricode" placeholder="E.g. LAL" aria-label="Away team" class="form-control" onkeypress="return /[a-z]/i.test(event.key)">
+                <div class="align-items-end" style="padding-top: 1.5%;">VS</div>
+                <input style="margin-left: 5%;text-transform:uppercase" id="home-team-tri-text" type="text" required size="10" maxlength="3" minlength="3" pattern="[A-Za-z]{3}" title="Home team tricode" placeholder="E.g. CHA" aria-label="Home team" class="form-control" onkeypress="return /[a-z]/i.test(event.key)">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Home</span>
+                </div>
+            </div>
+            <div style="margin: auto;width: 50%;text-align: center;margin-top: 10%;">
+                <button type="submit" class="btn btn-light">Continue</button>
+            </div>
+        </form>
+    </div>
+
     <div id="content">
       <div class="container">
         <div class="row justify-content-md-center text-center">

@@ -23,6 +23,7 @@ window.onload = () => {
     reader.onload = readerEvent => {
       const fileData = readerEvent.target.result
 
+      window.rawFileData = fileData
       parseFileHtml(fileData, filename)
     }
   }
@@ -39,6 +40,12 @@ window.onload = () => {
     const teamTwoPlayersTable = tables[3]
 
     let teams = getTeams(gameInfoTable, filename)
+    if (typeof teams[0].triCode === 'undefined' || typeof teams[1].triCode === 'undefined') {
+      document.getElementById('loading').classList.add('d-none')
+      document.getElementById('team-inputs').classList.remove('d-none')
+      return
+    }
+
     teams = addScoreboard(scoreboardTable, teams)
     teams = addPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
 
@@ -93,8 +100,12 @@ window.onload = () => {
     if (teamException.length > 0) {
       triCode = teamException[0].triCode
 
-      if (Array.isArray(triCode) && triCode.includes(fallback)) {
-        triCode = fallback
+      if (Array.isArray(triCode)) {
+        if (triCode.includes(fallback)) {
+          triCode = fallback
+        } else {
+          return {}
+        }
       }
     }
 
@@ -327,5 +338,18 @@ window.onload = () => {
   function deactivateTab (element) {
     element.classList.remove('active-tab')
     element.classList.add('deactive-tab')
+  }
+
+  document.getElementById('teams-txt-form').parentElement.onsubmit = function (e) {
+    e.preventDefault()
+
+    const homeTeamTriCode = document.getElementById('home-team-tri-text').value
+    const visitorTeamTriCode = document.getElementById('visitor-team-tri-text').value
+    const newFileName = `${visitorTeamTriCode}-VS-${homeTeamTriCode}`
+
+    document.getElementById('loading').classList.remove('d-none')
+    document.getElementById('team-inputs').classList.add('d-none')
+
+    parseFileHtml(window.rawFileData, newFileName)
   }
 }

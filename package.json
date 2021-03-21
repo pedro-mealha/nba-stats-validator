@@ -8,7 +8,8 @@
     "npm": "7.x"
   },
   "scripts": {
-    "watch": "webpack --mode=development && browser-sync start -s ./public -f ./ --no-notify --index index.html",
+    "watch": "webpack --watch --mode=development",
+    "serve": "browser-sync start -s ./public -f ./ --no-notify --index index.html",
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development"
   },
