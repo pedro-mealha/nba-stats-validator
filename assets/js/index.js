@@ -1,11 +1,16 @@
 import { populateHtml } from './populate.js'
 import { getGameId, getGameData, getTeamLogo } from './external.js'
+import { reValidateData } from './validator.js'
 
 window.onload = () => {
   const openFileBtn = document.getElementById('open-file-btn')
 
   const input = document.createElement('input')
   input.type = 'file'
+
+  document.getElementById('open-new-file-btn').onclick = () => {
+    input.click()
+  }
 
   openFileBtn.onclick = () => {
     input.click()
@@ -19,6 +24,7 @@ window.onload = () => {
 
     const file = e.target.files[0]
     const filename = file.name.replace('.htm', '')
+    document.getElementById('filename').innerHTML = filename
     const reader = new FileReader()
     reader.readAsText(file, 'utf16le')
 
@@ -65,6 +71,8 @@ window.onload = () => {
 
     parsedData.teams = updateTeamData(teams, gameData)
     parsedData.gameData = gameData
+    parsedData.gameId = gameId
+    parsedData.dateFormated = dateFormated
 
     window.fileData = parsedData
     populateHtml(parsedData)
@@ -345,9 +353,20 @@ window.onload = () => {
 
   document.onkeyup = function (e) {
     const evt = window.event || e
-    // ctrl + 'n' key
-    if (evt.ctrlKey && evt.keyCode === 78) {
+    // alt + 'n' key
+    if (evt.altKey && evt.keyCode === 78) {
       input.click()
     }
+  }
+
+  document.getElementById('validate').onclick = async function (e) {
+    e.preventDefault()
+
+    const currentData = window.fileData
+    const gameData = await getGameData(currentData.dateFormated, currentData.gameId)
+
+    window.fileData.gameData = gameData
+
+    reValidateData(window.fileData)
   }
 }

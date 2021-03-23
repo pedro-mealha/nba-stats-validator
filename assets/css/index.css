@@ -19,6 +19,12 @@ body {
     margin-right: 15%;
 }
 
+.top-bar {
+    border-bottom: 1px solid #fdfdfd;
+    margin-bottom: 3%;
+    padding-bottom: 1%;
+}
+
 #visitor-team-name-players-title, #home-team-name-players-title, #home-team-name, #visitor-team-name:first-letter {
     text-transform:capitalize;
 }
@@ -212,3 +218,18 @@ footer .github-link:hover{
   50%{background-position:right}
   100%{background-position:left}
 }
+
+/* Rules for sizing the icon. */
+.material-icons.md-14 { font-size: 14px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }

@@ -10,16 +10,24 @@ export function validatePlayerStats (playersTableId, teamId, titleId) {
 
     const nbaStats = fetchNbaPlayerStats(firstName, lastName, teamId)
     if (nbaStats === null) {
-      stats[0].innerHTML = '<span class="material-icons md-18" style="font-size:14px;">help</span> ' + stats[0].innerText
+      if (stats[0].children.length > 0) {
+        stats[0].removeChild(stats[0].firstChild)
+      }
+
+      stats[0].innerHTML = '<span class="material-icons md-14">help</span> ' + stats[0].innerText
       continue
     }
 
     errors |= validateStats(stats, nbaStats)
   }
 
+  const el = document.getElementById(titleId)
+  if (el.children.length > 0) {
+    el.removeChild(el.firstChild)
+  }
+
   if (errors) {
-    const el = document.getElementById(titleId)
-    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">report_problem</span> ' + el.innerHTML
+    el.innerHTML = '<span class="material-icons md-14">report_problem</span> ' + el.innerText
   }
 }
 
@@ -31,7 +39,7 @@ export function validateTeamStats (playersTableId, titleId) {
 
   const el = document.getElementById(titleId)
   if (errors && !el.hasChildNodes) {
-    el.innerHTML = '<span class="material-icons md-18" style="font-size:14px;">report_problem</span> ' + el.innerHTML
+    el.innerHTML = '<span class="material-icons md-14">report_problem</span> ' + el.innerHTML
   }
 }
 
@@ -72,11 +80,15 @@ function fetchNbaTeamStats (playersTableId) {
 function validateStats (stats, nbaStats) {
   let errors = false
 
+  stats[0].parentElement.classList.remove('table-warning')
+
   for (const stat of stats) {
     const matchKey = stat.getAttribute('data-match-key')
     if (matchKey === null || isNaN(parseInt(nbaStats[matchKey], 10))) {
       continue
     }
+
+    stat.classList.remove('cell-danger')
 
     if (parseInt(nbaStats[matchKey], 10) !== parseInt(stat.innerText, 10)) {
       errors |= true
@@ -85,4 +97,12 @@ function validateStats (stats, nbaStats) {
   }
 
   return errors
+}
+
+export function reValidateData (data) {
+  validatePlayerStats('home-players-table', data.teams.home.id, 'home-team-name-players-title')
+  validatePlayerStats('visitor-players-table', data.teams.visitor.id, 'visitor-team-name-players-title')
+
+  validateTeamStats('home-players-table', 'home-team-name-players-title')
+  validateTeamStats('visitor-players-table', 'visitor-team-name-players-title')
 }

@@ -52,6 +52,15 @@
 
     <div id="content">
       <div class="container">
+        <div class="row top-bar">
+            <div class="col" id="filename">File name</div>
+            <div class="col" style="text-align: right;">
+                <a href="#" id="open-new-file-btn" style="text-decoration: none; color: white;">
+                    <span class="material-icons md-18" style="vertical-align: sub;">upload_file</span>
+                    Upload new file
+                </a>
+            </div>
+        </div>
         <div class="row justify-content-md-center text-center">
             <div class="col" id="date"></div>
         </div>
@@ -110,6 +119,14 @@
             </div>
             <div class="col-auto deactive-tab noselect">
                 <span id="visitor-team-name-players-title"></span> (Visitor)
+            </div>
+            <div class="col" style="text-align: right;">
+                <a href="#" style="text-decoration: none; color: white;" id="validate">
+                <span class="material-icons md-18" style="vertical-align: sub;">
+                    sync
+                </span>
+                Validate
+            </a>
             </div>
         </div>
         <div class="row" style="margin-bottom: 5%;">
