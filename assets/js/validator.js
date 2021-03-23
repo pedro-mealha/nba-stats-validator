@@ -105,5 +105,6 @@ export function reValidateData (data) {
 
   validateTeamStats('home-players-table', 'home-team-name-players-title')
   validateTeamStats('visitor-players-table', 'visitor-team-name-players-title')
+
   document.getElementById('validate').querySelector('span').classList.remove('animate-validate')
 }
