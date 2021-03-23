@@ -5,7 +5,7 @@
   "main": "./assets/js/index.js",
   "license": "GNU",
   "engines": {
-    "npm": "7.x"
+    "npm": "7.6"
   },
   "scripts": {
     "watch": "webpack --watch --mode=development",
