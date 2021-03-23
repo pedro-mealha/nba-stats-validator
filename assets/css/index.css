@@ -233,3 +233,12 @@ footer .github-link:hover{
 /* Rules for using icons as white on a dark background. */
 .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+.animate-validate {
+    animation: full-spin 1.2s linear infinite;
+}
+
+@keyframes full-spin {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}

@@ -362,6 +362,8 @@ window.onload = () => {
   document.getElementById('validate').onclick = async function (e) {
     e.preventDefault()
 
+    this.querySelectorAll('span')[0].classList.add('animate-validate')
+
     const currentData = window.fileData
     const gameData = await getGameData(currentData.dateFormated, currentData.gameId)
 
