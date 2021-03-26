@@ -1,6 +1,8 @@
 # Nba stats validator
-![js](https://img.shields.io/badge/JavaScript-ECMAScript%202020-blue) ![npm](https://img.shields.io/badge/npm-7.6.3-blue) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-
+![js](https://img.shields.io/badge/JavaScript-ECMAScript%202020-blue)
+![npm](https://img.shields.io/badge/npm-7.6.3-blue)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/WeNeedThePoh/nba-stats-validator/graphs/commit-activity)
 
 ***Live URL:*** https://nba-stats-validator.herokuapp.com  
 
