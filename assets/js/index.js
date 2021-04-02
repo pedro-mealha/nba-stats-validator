@@ -63,7 +63,7 @@ window.onload = () => {
       teams: teams
     }
 
-    const dateFormated = `${parsedData.startsAt.getFullYear()}${('0' + (parsedData.startsAt.getMonth() + 1)).slice(-2)}${parsedData.startsAt.getDate()}`
+    const dateFormated = `${parsedData.startsAt.getFullYear()}${('0' + (parsedData.startsAt.getMonth() + 1)).slice(-2)}${('0' + parsedData.startsAt.getDate()).slice(-2)}`
     const gameId = await getGameId(dateFormated, teams)
     const gameData = await getGameData(dateFormated, gameId)
 
