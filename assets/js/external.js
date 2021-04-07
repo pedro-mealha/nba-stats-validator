@@ -1,7 +1,7 @@
 import * as config from './../../env.js'
 
 export async function getGameId (date, teams) {
-  return httpGet(`${date}/scoreboard.json`)
+  return httpGet(`${getApiBaseUrl()}${date}/scoreboard.json`)
     .then(function (response) {
       if (response.games.length > 0) {
         const games = response.games.filter(game => {
@@ -15,21 +15,20 @@ export async function getGameId (date, teams) {
 }
 
 export async function getGameData (date, gameId) {
-  return httpGet(`${date}/${gameId}_boxscore.json`)
+  return httpGet(`${getApiBaseUrl()}${date}/${gameId}_boxscore.json`)
     .then(function (response) {
       return response
     })
 }
 
 export function getTeamLogo (teamId) {
-  const url = config.default.nba_logo_url
-  return url.replace('{teamId}', teamId)
+  return getCdnBaseUrl() + `logos/nba/${teamId}/global/L/logo.svg`
 }
 
-function httpGet (theUrl) {
+function httpGet (url) {
   return new Promise((resolve, reject) => {
     const client = new XMLHttpRequest()
-    client.open('GET', getBaseUrl() + theUrl)
+    client.open('GET', url)
     client.send()
 
     client.onreadystatechange = function () {
@@ -40,6 +39,10 @@ function httpGet (theUrl) {
   })
 }
 
-function getBaseUrl () {
+function getApiBaseUrl () {
   return `${config.default.nba_api_base_url}/${config.default.nba_api_prefix}/`
+}
+
+function getCdnBaseUrl () {
+  return `${config.default.nba_cdn_base_url}/`
 }
