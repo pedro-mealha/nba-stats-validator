@@ -84,13 +84,25 @@ function validateStats (stats, nbaStats) {
 
   for (const stat of stats) {
     const matchKey = stat.getAttribute('data-match-key')
-    if (matchKey === null || isNaN(parseInt(nbaStats[matchKey], 10))) {
+    const keyType = stat.getAttribute('data-match-key-type')
+    let mismatch = false
+    if (matchKey === null || (keyType === 'int' && isNaN(parseInt(nbaStats[matchKey], 10)))) {
       continue
     }
 
     stat.classList.remove('cell-danger')
 
-    if (parseInt(nbaStats[matchKey], 10) !== parseInt(stat.innerText, 10)) {
+    switch (keyType) {
+      case 'string':
+        mismatch = nbaStats[matchKey] !== stat.innerText
+        break
+      case 'int':
+      default:
+        mismatch = parseInt(nbaStats[matchKey], 10) !== parseInt(stat.innerText, 10)
+        break
+    }
+
+    if (mismatch) {
       errors |= true
       addErrorMessage(stat, nbaStats[matchKey])
     }

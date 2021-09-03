@@ -54,25 +54,25 @@ function populatePlyersTable (players, id) {
       <tr>
         <td data-first-name="${player.firstName}" data-last-name="${player.lastName}">${player.firstName} ${player.lastName}</td>
         <td>${player.position}</td>
-        <td>${player.minutes}</td>
-        <td data-match-key="fgm">${player.fieldGoalsMade}</td>
-        <td data-match-key="fga">${player.fieldGoalsAttempts}</td>
-        <td data-match-key="fgp">${player.fieldGoalsPercentage}</td>
-        <td data-match-key="tpm">${player.threePointsMade}</td>
-        <td data-match-key="tpa">${player.threePointsAttempts}</td>
-        <td data-match-key="tpp">${player.threePointsPercentage}</td>
-        <td data-match-key="ftm">${player.freeThrowMade}</td>
-        <td data-match-key="fta">${player.freeThrowAttempts}</td>
-        <td data-match-key="ftp">${player.freeThrowPercentage}</td>
-        <td data-match-key="offReb">${player.offensiveRebounds}</td>
-        <td data-match-key="defReb">${player.defensiveRebounds}</td>
-        <td data-match-key="totReb">${player.totalRebounds}</td>
-        <td data-match-key="assists">${player.assists}</td>
-        <td data-match-key="pFouls">${player.personalFouls}</td>
-        <td data-match-key="steals">${player.steals}</td>
-        <td data-match-key="turnovers">${player.turnouvers}</td>
-        <td data-match-key="blocks">${player.blocks}</td>
-        <td data-match-key="points">${player.points}</td>
+        <td data-match-key="min" data-match-key-type="string">${player.minutes}</td>
+        <td data-match-key="fgm" data-match-key-type="int">${player.fieldGoalsMade}</td>
+        <td data-match-key="fga" data-match-key-type="int">${player.fieldGoalsAttempts}</td>
+        <td data-match-key="fgp" data-match-key-type="int">${player.fieldGoalsPercentage}</td>
+        <td data-match-key="tpm" data-match-key-type="int">${player.threePointsMade}</td>
+        <td data-match-key="tpa" data-match-key-type="int">${player.threePointsAttempts}</td>
+        <td data-match-key="tpp" data-match-key-type="int">${player.threePointsPercentage}</td>
+        <td data-match-key="ftm" data-match-key-type="int">${player.freeThrowMade}</td>
+        <td data-match-key="fta" data-match-key-type="int">${player.freeThrowAttempts}</td>
+        <td data-match-key="ftp" data-match-key-type="int">${player.freeThrowPercentage}</td>
+        <td data-match-key="offReb" data-match-key-type="int">${player.offensiveRebounds}</td>
+        <td data-match-key="defReb" data-match-key-type="int">${player.defensiveRebounds}</td>
+        <td data-match-key="totReb" data-match-key-type="int">${player.totalRebounds}</td>
+        <td data-match-key="assists" data-match-key-type="int">${player.assists}</td>
+        <td data-match-key="pFouls" data-match-key-type="int">${player.personalFouls}</td>
+        <td data-match-key="steals" data-match-key-type="int">${player.steals}</td>
+        <td data-match-key="turnovers" data-match-key-type="int">${player.turnouvers}</td>
+        <td data-match-key="blocks" data-match-key-type="int">${player.blocks}</td>
+        <td data-match-key="points" data-match-key-type="int">${player.points}</td>
       </tr>
     `
   }
@@ -87,24 +87,24 @@ function addTeamScores (score, id) {
         <td>TOTALS</td>
         <td></td>
         <td></td>
-        <td data-match-key="fgm">${score.fieldGoalsMade}</td>
-        <td data-match-key="fga">${score.fieldGoalsAttempts}</td>
-        <td data-match-key="fgp">${score.fieldGoalsPercentage}</td>
-        <td data-match-key="tpm">${score.threePointsMade}</td>
-        <td data-match-key="tpa">${score.threePointsAttempts}</td>
-        <td data-match-key="tpp">${score.threePointsPercentage}</td>
-        <td data-match-key="ftm">${score.freeThrowMade}</td>
-        <td data-match-key="fta">${score.freeThrowAttempts}</td>
-        <td data-match-key="ftp">${score.freeThrowPercentage}</td>
-        <td data-match-key="offReb">${score.offensiveRebounds}</td>
-        <td data-match-key="defReb">${score.defensiveRebounds}</td>
-        <td data-match-key="totReb">${score.totalRebounds}</td>
-        <td data-match-key="assists">${score.assists}</td>
-        <td data-match-key="pFouls">${score.personalFouls}</td>
-        <td data-match-key="steals">${score.steals}</td>
-        <td data-match-key="turnovers">${score.turnouvers}</td>
-        <td data-match-key="blocks">${score.blocks}</td>
-        <td data-match-key="points">${score.points}</td>
+        <td data-match-key="fgm" data-match-key-type="int">${score.fieldGoalsMade}</td>
+        <td data-match-key="fga" data-match-key-type="int">${score.fieldGoalsAttempts}</td>
+        <td data-match-key="fgp" data-match-key-type="int">${score.fieldGoalsPercentage}</td>
+        <td data-match-key="tpm" data-match-key-type="int">${score.threePointsMade}</td>
+        <td data-match-key="tpa" data-match-key-type="int">${score.threePointsAttempts}</td>
+        <td data-match-key="tpp" data-match-key-type="int">${score.threePointsPercentage}</td>
+        <td data-match-key="ftm" data-match-key-type="int">${score.freeThrowMade}</td>
+        <td data-match-key="fta" data-match-key-type="int">${score.freeThrowAttempts}</td>
+        <td data-match-key="ftp" data-match-key-type="int">${score.freeThrowPercentage}</td>
+        <td data-match-key="offReb" data-match-key-type="int">${score.offensiveRebounds}</td>
+        <td data-match-key="defReb" data-match-key-type="int">${score.defensiveRebounds}</td>
+        <td data-match-key="totReb" data-match-key-type="int">${score.totalRebounds}</td>
+        <td data-match-key="assists" data-match-key-type="int">${score.assists}</td>
+        <td data-match-key="pFouls" data-match-key-type="int">${score.personalFouls}</td>
+        <td data-match-key="steals" data-match-key-type="int">${score.steals}</td>
+        <td data-match-key="turnovers" data-match-key-type="int">${score.turnouvers}</td>
+        <td data-match-key="blocks" data-match-key-type="int">${score.blocks}</td>
+        <td data-match-key="points" data-match-key-type="int">${score.points}</td>
       </tr>
   `
 
@@ -129,11 +129,11 @@ function addTeamSecondaryScores (score, id) {
         <td></td>
         <td></td>
         <td></td>
-        <td data-match-key="teamReb">${score.teamRebounds}</td>
+        <td data-match-key="teamReb" data-match-key-type="int">${score.teamRebounds}</td>
         <td></td>
         <td></td>
         <td></td>
-        <td data-match-key="turnovers">${score.teamTurnovers}</td>
+        <td data-match-key="turnovers" data-match-key-type="int">${score.teamTurnovers}</td>
         <td></td>
         <td></td>
       </tr>
