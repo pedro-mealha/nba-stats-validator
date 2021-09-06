@@ -2,6 +2,7 @@
     "root": "./public",
     "clean_urls": true,
     "routes": {
-        "/*.html": "index.html"
+        "/*.html": "index.html",
+	"/.well-know/acme-challenge/qDzBc00IL3RKeROpiPyJoAflvT_l21Zu3-MLPPpy6jk": ".well-know/acme-challenge/qDzBc00IL3RKeROpiPyJoAflvT_l21Zu3-MLPPpy6jk"
     }
 }
