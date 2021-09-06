@@ -5,9 +5,9 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/WeNeedThePoh/nba-stats-validator/graphs/commit-activity)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/affa3c9f-aff1-4f60-bbd3-0ace725bf778/deploy-status)](https://app.netlify.com/sites/nba-stats-validator/deploys)
 
-***Live URL:*** https://nba-stats-validator.herokuapp.com  
+***Live URL:*** https://nbastats.app.pedromealha.dev
 
-***Tech stack***: HTML, CSS, vanilla JS, Bootstrap, Google Fonts, Google Icons, NPM, Webpack, Heroku, ESLINT
+***Tech stack***: HTML, CSS, vanilla JS, Bootstrap, Google Fonts, Google Icons, NPM, Webpack, Netlify, ESLINT
 
 A small website to validate your own nba game statistics with nba.com statistics.
 
@@ -42,22 +42,14 @@ https://cdn.nba.com/logos/nba/{teamId}/global/L/logo.svg
 
 # Deployment
 
-We are using heroku for hosting, so we have heroku directly connect to github, so every time we push to `main` we will trigger a new deploy to production. With this we have a true CI/CD deployment strategy, so whenever we push something is going straigh to production.
+We are using netlify for hosting, so we have netlify directly connect to github, so every time we push to `main` we will trigger a new deploy to production. With this we have a true CI/CD deployment strategy, so whenever we push something is going straigh to production.
 
-We are using two buildpacks from heroku:
-
-### NodeJs  
+For deployment configuration we keep it simple as the app does not require a lot of fancy things. We configure the build command and thats it
 ```
-https://github.com/heroku/heroku-buildpack-nodejs
-```
-This is only to build our app to be production ready. This will install npm and run `npm run build` which we will talk in bit.
-
-### Static
-```
-https://github.com/heroku/heroku-buildpack-static
+npm run build
 ```
 
-This is just to serve the static files, what this does is spawn a NGINX server and serves by default the public directory. For this we have the config file `/static.json`.
+Define the public directory to which we serve the static files and it's ready to go.
 
 ## Build
 
