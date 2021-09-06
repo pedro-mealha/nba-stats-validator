@@ -2,7 +2,6 @@
     "root": "./public",
     "clean_urls": false,
     "routes": {
-        "/.well-known/acme-challenge/WTUWgoFWs51_PrOT3Jvv1eLx3PsvCtJOPYtOk0ZEB1o": "acme-challenge.txt",
         "/*.html": "index.html"
     }
 }
