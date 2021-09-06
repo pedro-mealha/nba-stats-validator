@@ -44,6 +44,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "./assets/css/index.css", to: "index.css" },
+        { from: "./acme-challenge.txt", to: "acme-challenge.txt" },
       ],
     }),
   ]
