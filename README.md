@@ -1,6 +1,6 @@
 # Nba stats validator
 ![js](https://img.shields.io/badge/JavaScript-ECMAScript%202020-blue)
-![npm](https://img.shields.io/badge/npm-7.24.1-blue)
+![npm](https://img.shields.io/badge/npm-8.1.1-blue)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/WeNeedThePoh/nba-stats-validator/graphs/commit-activity)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/affa3c9f-aff1-4f60-bbd3-0ace725bf778/deploy-status)](https://app.netlify.com/sites/nba-stats-validator/deploys)
