@@ -5,7 +5,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/WeNeedThePoh/nba-stats-validator/graphs/commit-activity)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/affa3c9f-aff1-4f60-bbd3-0ace725bf778/deploy-status)](https://app.netlify.com/sites/nba-stats-validator/deploys)
 
-***Live URL:*** https://nbastats.app.pedromealha.dev
+***Live URL:*** <https://nbastats.app.pedromealha.dev>
 
 ***Tech stack***: HTML, CSS, vanilla JS, Bootstrap, Google Fonts, Google Icons, NPM, Webpack, Netlify, ESLINT
 
@@ -23,35 +23,35 @@ Endpoints that we are using:
 
 Fetch all games for a specific date.  
 `{data}` format: %Y%m%d
-```
+```sh
 https://data.nba.net/prod/v1/{date}/scoreboard.json
 ```
 
 Fetch game data .  
 `{data}`: format: %Y%m%d | e.g. `20210317`  
 `{gameId}`: format: number | e.g. `12351234`
-```
+```sh
 https://data.nba.net/prod/v1/{date}/{gameId}_boxscore.json
 ```
 
 Fetch team logo SVG .  
 `{teamId}`: format: number | e.g. `12351234`
-```
+```sh
 https://cdn.nba.com/logos/nba/{teamId}/global/L/logo.svg
 ```
 
-# Deployment
+## Deployment
 
 We are using netlify for hosting, so we have netlify directly connect to github, so every time we push to `main` we will trigger a new deploy to production. With this we have a true CI/CD deployment strategy, so whenever we push something is going straigh to production.
 
 For deployment configuration we keep it simple as the app does not require a lot of fancy things. We configure the build command and thats it
-```
+```sh
 npm run build
 ```
 
 Define the public directory to which we serve the static files and it's ready to go.
 
-## Build
+### Build
 
 So why build a static site? First we don't need to serve all files to the browser and for the performance side we want our files to minimazed and obfuscated. We are already using a NGINX server to serve our files so we now can just push the build files to `/public` and we are good to go.
 
@@ -60,37 +60,37 @@ Initially we were using [Gulp](gulpjs.com) and it did work but the `gulpfile.js`
 So we switch to [Webpack](https://webpack.js.org/) and it was the best thing we did. It's straigh foward and really easy to configure. We can use the build for production or development and just workds flawless.
 Currently we are create the bundle with all the sourcemaps and minimafying and uglify all files -- html, css and js.
 
-# Development
+## Development
 
 To get started clone the repo
-```
+```sh
 git clone https://github.com/WeNeedThePoh/nba-stats-validator.git
 
 cd nba-stats-validator
 ```
 
 Install dependencies
-```
+```sh
 npm install
 ```
 
 Build Files
-```
+```sh
 npm run build:dev
 ```
 
 Start server
-```
+```sh
 npm run serve
 ```
 
 You can have automatic builds whenever a file is changed. This will make webpack watching file changes and trigger new builds.
-```
+```sh
 npm run watch
 ```
 
 To test the app use the files in the [`/examples dir`]('examples/').
 
-# License
+## License
 
 GPLv3 Licensed (file [LICENSE](LICENSE)).
