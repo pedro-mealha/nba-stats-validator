@@ -4,7 +4,6 @@ on: [pull_request]
 jobs:
   linter:
     runs-on: ubuntu-latest
-    environment: staging
 
     steps:
       - name: Checkout Code
@@ -13,7 +12,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint Code Base
-        uses: docker://github/super-linter:v4
+        uses: docker://github/super-linter:slim-v4
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_CSS: true

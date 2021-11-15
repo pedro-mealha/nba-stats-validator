@@ -7,7 +7,6 @@ on:
 jobs:
   # linter:
   #   runs-on: ubuntu-latest
-  #   environment: staging
 
   #   steps:
   #     - name: Checkout Code
@@ -16,7 +15,7 @@ jobs:
   #         fetch-depth: 0
 
   #     - name: Lint Code Base
-  #       uses: docker://github/super-linter:v4
+  #       uses: docker://github/super-linter:slim-v4
   #       env:
   #         VALIDATE_ALL_CODEBASE: false
   #         VALIDATE_PYTHON: true
@@ -29,7 +28,6 @@ jobs:
   # build:
   #   # needs: [linter]
   #   runs-on: ubuntu-latest
-  #   environment: staging
 
   #   steps:
   #   - uses: actions/checkout@v2
@@ -51,7 +49,7 @@ jobs:
     - name: Publish
       uses: netlify/actions/cli@master
       with:
-        args: deploy --build
+        args: deploy -m 'v${{ github.sha }}'
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
