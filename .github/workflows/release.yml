@@ -9,12 +9,27 @@ jobs:
     environment: production
 
     steps:
-    - uses: actions/checkout@master
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-    - name: Publish
-      uses: netlify/actions/cli@master
-      with:
-        args: deploy --prod --build=npm run build
-      env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install netlify-cli
+        run: npm install netlify-cli -g
+
+      - name: Get deploy ID
+        id: get_deploy_id
+        run: |
+          DEPLOY_ID=$(netlify api listSiteDeploys --data '{ "site_id": "${{ secrets.NETLIFY_SITE_ID }}", "page": 1, "per_page": 1}' | head -n 3 | tr '{' '\n' | tr , '\n' | tr '}' '\n' | grep "id" | awk  -F'"' '{print $4}')
+          echo "::set-output name=deploy_id::$DEPLOY_ID"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Publish
+        run: |
+          netlify api restoreSiteDeploy --data '{ "site_id": "${{ secrets.NETLIFY_SITE_ID }}", "deploy_id": "${{ steps.get_deploy_id.outputs.deploy_id }}" }'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
