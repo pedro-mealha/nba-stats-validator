@@ -5,51 +5,34 @@ on:
       - main
 
 jobs:
-  # linter:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v2
-  #       with:
-  #         fetch-depth: 0
-
-  #     - name: Lint Code Base
-  #       uses: docker://github/super-linter:slim-v4
-  #       env:
-  #         VALIDATE_ALL_CODEBASE: false
-  #         VALIDATE_PYTHON: true
-  #         VALIDATE_DOCKERFILE: true
-  #         VALIDATE_GITHUB_ACTIONS: true
-  #         VALIDATE_MARKDOWN: true
-  #         DEFAULT_BRANCH: main
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # build:
-  #   # needs: [linter]
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #   - uses: actions/checkout@v2
-
-  #   - name: Publish
-  #     uses: netlify/actions/build@master
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-  #       NETLIFY_CMD: npm run build
-  #       NETLIFY_DIR: public
-  publish:
+  deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
 
     steps:
-    - uses: actions/checkout@master
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-    - name: Publish
-      uses: netlify/actions/cli@master
-      with:
-        args: deploy -m 'v${{ github.sha }}'
-      env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          npm install netlify-cli -g
+          npm ci
+
+      - name: Build
+        run: |
+          netlify build --context=staging
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      - name: Deploy
+        run: |
+          netlify deploy -m '${{ github.sha }}'
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
