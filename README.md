@@ -1,4 +1,5 @@
 # Nba stats validator
+
 ![js](https://img.shields.io/badge/JavaScript-ECMAScript%202020-blue)
 ![npm](https://img.shields.io/badge/npm-8.1.1-blue)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -23,6 +24,7 @@ Endpoints that we are using:
 
 Fetch all games for a specific date.  
 `{data}` format: %Y%m%d
+
 ```sh
 https://data.nba.net/prod/v1/{date}/scoreboard.json
 ```
@@ -30,21 +32,24 @@ https://data.nba.net/prod/v1/{date}/scoreboard.json
 Fetch game data .  
 `{data}`: format: %Y%m%d | e.g. `20210317`  
 `{gameId}`: format: number | e.g. `12351234`
+
 ```sh
 https://data.nba.net/prod/v1/{date}/{gameId}_boxscore.json
 ```
 
 Fetch team logo SVG .  
 `{teamId}`: format: number | e.g. `12351234`
+
 ```sh
 https://cdn.nba.com/logos/nba/{teamId}/global/L/logo.svg
 ```
 
 ## Deployment
 
-We are using netlify for hosting, so we have netlify directly connect to github, so every time we push to `main` we will trigger a new deploy to production. With this we have a true CI/CD deployment strategy, so whenever we push something is going straigh to production.
+We are using netlify for hosting, we use github actions to make deployments. On github actions we use netlify CLI to trigger builds and deploy it to staging/production. Deployments to staging and production are different, so what we do is we build and deploy to staging, if everything is OK, when making a new release of the repo we re-deploy the staging build to production. The way to do it is by grabing the last deployment ID and just publish it to production on netlify.
 
 For deployment configuration we keep it simple as the app does not require a lot of fancy things. We configure the build command and thats it
+
 ```sh
 npm run build
 ```
@@ -63,6 +68,7 @@ Currently we are create the bundle with all the sourcemaps and minimafying and u
 ## Development
 
 To get started clone the repo
+
 ```sh
 git clone https://github.com/WeNeedThePoh/nba-stats-validator.git
 
@@ -70,21 +76,25 @@ cd nba-stats-validator
 ```
 
 Install dependencies
+
 ```sh
 npm install
 ```
 
 Build Files
+
 ```sh
 npm run build:dev
 ```
 
 Start server
+
 ```sh
 npm run serve
 ```
 
 You can have automatic builds whenever a file is changed. This will make webpack watching file changes and trigger new builds.
+
 ```sh
 npm run watch
 ```
