@@ -20,7 +20,7 @@ changelog:
         - "security"
     - title: 📝 Documentation
       labels:
-        - "docs"
+        - "documentation"
     - title: Other Changes
       labels:
         - "*"
