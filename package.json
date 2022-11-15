@@ -14,7 +14,7 @@
     "build:dev": "webpack --mode=development"
   },
   "dependencies": {
-    "webpack": "^5.74.0",
+    "webpack": "^5.75.0",
     "html-webpack-plugin": "^5.5.0",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "css-loader": "^6.7.1",
