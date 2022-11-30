@@ -1,7 +1,7 @@
 import { validatePlayerStats, validateTeamStats } from './validator.js'
 
 export async function populateHtml (data) {
-  document.getElementById('date').innerHTML = data.startsAt.toUTCString()
+  document.getElementById('date').innerHTML = `${data.date} ${data.startsAt}`
   document.getElementById('location').innerHTML = data.location
 
   document.getElementById('home-logo').src = data.teams.home.logo
@@ -58,21 +58,21 @@ function populatePlyersTable (players, id) {
         <td data-match-key="fgm" data-match-key-type="int">${player.fieldGoalsMade}</td>
         <td data-match-key="fga" data-match-key-type="int">${player.fieldGoalsAttempts}</td>
         <td data-match-key="fgp" data-match-key-type="int">${player.fieldGoalsPercentage}</td>
-        <td data-match-key="tpm" data-match-key-type="int">${player.threePointsMade}</td>
-        <td data-match-key="tpa" data-match-key-type="int">${player.threePointsAttempts}</td>
-        <td data-match-key="tpp" data-match-key-type="int">${player.threePointsPercentage}</td>
+        <td data-match-key="3fgm" data-match-key-type="int">${player.threePointsMade}</td>
+        <td data-match-key="3fga" data-match-key-type="int">${player.threePointsAttempts}</td>
+        <td data-match-key="3fgp" data-match-key-type="int">${player.threePointsPercentage}</td>
         <td data-match-key="ftm" data-match-key-type="int">${player.freeThrowMade}</td>
         <td data-match-key="fta" data-match-key-type="int">${player.freeThrowAttempts}</td>
         <td data-match-key="ftp" data-match-key-type="int">${player.freeThrowPercentage}</td>
-        <td data-match-key="offReb" data-match-key-type="int">${player.offensiveRebounds}</td>
-        <td data-match-key="defReb" data-match-key-type="int">${player.defensiveRebounds}</td>
-        <td data-match-key="totReb" data-match-key-type="int">${player.totalRebounds}</td>
-        <td data-match-key="assists" data-match-key-type="int">${player.assists}</td>
-        <td data-match-key="pFouls" data-match-key-type="int">${player.personalFouls}</td>
-        <td data-match-key="steals" data-match-key-type="int">${player.steals}</td>
-        <td data-match-key="turnovers" data-match-key-type="int">${player.turnouvers}</td>
-        <td data-match-key="blocks" data-match-key-type="int">${player.blocks}</td>
-        <td data-match-key="points" data-match-key-type="int">${player.points}</td>
+        <td data-match-key="oreb" data-match-key-type="int">${player.offensiveRebounds}</td>
+        <td data-match-key="dreb" data-match-key-type="int">${player.defensiveRebounds}</td>
+        <td data-match-key="reb" data-match-key-type="int">${player.totalRebounds}</td>
+        <td data-match-key="ast" data-match-key-type="int">${player.assists}</td>
+        <td data-match-key="pf" data-match-key-type="int">${player.personalFouls}</td>
+        <td data-match-key="stl" data-match-key-type="int">${player.steals}</td>
+        <td data-match-key="to" data-match-key-type="int">${player.turnouvers}</td>
+        <td data-match-key="blk" data-match-key-type="int">${player.blocks}</td>
+        <td data-match-key="pts" data-match-key-type="int">${player.points}</td>
       </tr>
     `
   }
@@ -90,21 +90,21 @@ function addTeamScores (score, id) {
         <td data-match-key="fgm" data-match-key-type="int">${score.fieldGoalsMade}</td>
         <td data-match-key="fga" data-match-key-type="int">${score.fieldGoalsAttempts}</td>
         <td data-match-key="fgp" data-match-key-type="int">${score.fieldGoalsPercentage}</td>
-        <td data-match-key="tpm" data-match-key-type="int">${score.threePointsMade}</td>
-        <td data-match-key="tpa" data-match-key-type="int">${score.threePointsAttempts}</td>
-        <td data-match-key="tpp" data-match-key-type="int">${score.threePointsPercentage}</td>
+        <td data-match-key="3fgm" data-match-key-type="int">${score.threePointsMade}</td>
+        <td data-match-key="3fga" data-match-key-type="int">${score.threePointsAttempts}</td>
+        <td data-match-key="3fgp" data-match-key-type="int">${score.threePointsPercentage}</td>
         <td data-match-key="ftm" data-match-key-type="int">${score.freeThrowMade}</td>
         <td data-match-key="fta" data-match-key-type="int">${score.freeThrowAttempts}</td>
         <td data-match-key="ftp" data-match-key-type="int">${score.freeThrowPercentage}</td>
-        <td data-match-key="offReb" data-match-key-type="int">${score.offensiveRebounds}</td>
-        <td data-match-key="defReb" data-match-key-type="int">${score.defensiveRebounds}</td>
-        <td data-match-key="totReb" data-match-key-type="int">${score.totalRebounds}</td>
-        <td data-match-key="assists" data-match-key-type="int">${score.assists}</td>
-        <td data-match-key="pFouls" data-match-key-type="int">${score.personalFouls}</td>
-        <td data-match-key="steals" data-match-key-type="int">${score.steals}</td>
-        <td data-match-key="turnovers" data-match-key-type="int">${score.turnouvers}</td>
-        <td data-match-key="blocks" data-match-key-type="int">${score.blocks}</td>
-        <td data-match-key="points" data-match-key-type="int">${score.points}</td>
+        <td data-match-key="oreb" data-match-key-type="int">${score.offensiveRebounds}</td>
+        <td data-match-key="dreb" data-match-key-type="int">${score.defensiveRebounds}</td>
+        <td data-match-key="reb" data-match-key-type="int">${score.totalRebounds}</td>
+        <td data-match-key="ast" data-match-key-type="int">${score.assists}</td>
+        <td data-match-key="pf" data-match-key-type="int">${score.personalFouls}</td>
+        <td data-match-key="stl" data-match-key-type="int">${score.steals}</td>
+        <td data-match-key="to" data-match-key-type="int">${score.turnouvers}</td>
+        <td data-match-key="blk" data-match-key-type="int">${score.blocks}</td>
+        <td data-match-key="pts" data-match-key-type="int">${score.points}</td>
       </tr>
   `
 

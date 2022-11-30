@@ -1,21 +1,24 @@
 import * as config from './../../env.js'
 
-export async function getGameId (date, teams) {
-  return httpGet(`${getApiBaseUrl()}${date}/scoreboard.json`)
+export async function getGameMetadata (date, league, teams) {
+  return httpGet(`${getApiBaseUrl()}/scoreboard?date=${date}&league=${league}`)
     .then(function (response) {
       if (response.games.length > 0) {
         const games = response.games.filter(game => {
-          return game.vTeam.triCode === teams[0].triCode || game.vTeam.triCode === teams[1].triCode ||
-            game.hTeam.triCode === teams[0].triCode || game.hTeam.triCode === teams[1].triCode
+          return game.away_team.tricode === teams[0].triCode || game.away_team.tricode === teams[1].triCode ||
+            game.home_team.tricode === teams[0].triCode || game.home_team.tricode === teams[1].triCode
         })
 
-        return games[0].gameId
+        return {
+          gameId: games[0].id,
+          gameStartsAt: games[0].starts_at
+        }
       }
     })
 }
 
-export async function getGameData (date, gameId) {
-  return httpGet(`${getApiBaseUrl()}${date}/${gameId}_boxscore.json`)
+export async function getGameData (gameId) {
+  return httpGet(`${getApiBaseUrl()}/boxscore?gameId=${gameId}`)
     .then(function (response) {
       return response
     })
@@ -40,7 +43,7 @@ function httpGet (url) {
 }
 
 function getApiBaseUrl () {
-  return `${config.default.nba_api_base_url}/${config.default.nba_api_prefix}/`
+  return `${config.default.nba_api_base_url}/${config.default.nba_api_prefix}`
 }
 
 function getCdnBaseUrl () {
