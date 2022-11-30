@@ -54,27 +54,31 @@ function addErrorMessage (element, correctValue) {
 }
 
 function fetchNbaPlayerStats (firstName, lastName, teamId) {
-  const players = window.fileData.gameData.stats.activePlayers
+  let players = window.fileData.gameData.away_team.players
+  if (teamId === window.fileData.gameData.home_team.id) {
+    players = window.fileData.gameData.home_team.players
+  }
 
   const filterplayers = players.filter((player) => {
-    const sameTeam = player.teamId === teamId
-    const sameLastName = player.lastName.slice(0, lastName.length) === lastName
-    const sameFirstName = player.firstName.slice(0, firstName.length) === firstName
+    const sameLastName = player.last_name.slice(0, lastName.length) === lastName
+    const sameFirstName = player.first_name.slice(0, firstName.length) === firstName
 
-    return sameTeam && sameFirstName && sameLastName
+    return sameFirstName && sameLastName
   })
 
   if (filterplayers.length === 0) {
     return null
   }
 
-  return filterplayers[0]
+  return filterplayers[0].stats
 }
 
 function fetchNbaTeamStats (playersTableId) {
-  const key = playersTableId.slice(0, 1) + 'Team'
+  if (playersTableId.slice(0, 1) === 'h') {
+    return window.fileData.gameData.home_team.stats
+  }
 
-  return window.fileData.gameData.stats[key].totals
+  return window.fileData.gameData.away_team.stats
 }
 
 function validateStats (stats, nbaStats) {

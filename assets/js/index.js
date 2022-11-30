@@ -1,5 +1,5 @@
 import { populateHtml } from './populate.js'
-import { getGameId, getGameData, getTeamLogo } from './external.js'
+import { getGameMetadata, getGameData, getTeamLogo } from './external.js'
 import { reValidateData } from './validator.js'
 
 window.onload = () => {
@@ -51,6 +51,7 @@ window.onload = () => {
     if (typeof teams[0].triCode === 'undefined' || typeof teams[1].triCode === 'undefined') {
       document.getElementById('loading').classList.add('d-none')
       document.getElementById('team-inputs').classList.remove('d-none')
+
       return
     }
 
@@ -58,16 +59,17 @@ window.onload = () => {
     teams = addPlayers(teams, teamOnePlayersTable, teamTwoPlayersTable)
 
     const parsedData = {
-      startsAt: getGameDate(gameInfoTable),
+      date: getGameDate(gameInfoTable),
       location: getGameLocation(gameInfoTable),
       teams: teams
     }
 
-    const dateFormated = `${parsedData.startsAt.getFullYear()}${('0' + (parsedData.startsAt.getMonth() + 1)).slice(-2)}${('0' + parsedData.startsAt.getDate()).slice(-2)}`
-    const gameId = await getGameId(dateFormated, teams)
-    const gameData = await getGameData(dateFormated, gameId)
+    const dateFormated = `${parsedData.date.getFullYear()}-${('0' + (parsedData.date.getMonth() + 1)).slice(-2)}-${('0' + parsedData.date.getDate()).slice(-2)}`
+    const { gameId, gameStartsAt } = await getGameMetadata(dateFormated, 'nba', teams)
+    const gameData = await getGameData(gameId)
 
-    parsedData.startsAt = getGameTime(gameInfoTable, gameData)
+    parsedData.date = dateFormated
+    parsedData.startsAt = gameStartsAt
 
     parsedData.teams = updateTeamData(teams, gameData)
     parsedData.gameData = gameData
@@ -130,14 +132,6 @@ window.onload = () => {
     const [gameDate] = gameLocationAndTime.split(' ')
 
     return new Date(gameDate)
-  }
-
-  function getGameTime (gameInfoTable, gameData) {
-    const gameLocationAndTime = gameInfoTable.querySelectorAll('tr')[2].firstElementChild.textContent
-    const [gameDate] = gameLocationAndTime.split(' ')
-    const gameTime = gameData.basicGameData.startTimeEastern.replace('ET', '')
-
-    return new Date(`${gameDate} ${gameTime} EST`)
   }
 
   function getGameLocation (gameInfoTable) {
@@ -233,7 +227,7 @@ window.onload = () => {
         steals,
         turnouvers,
         blocks,
-        points,
+        points
         // +/-
       ] = stat.querySelectorAll('td')
 
@@ -288,17 +282,17 @@ window.onload = () => {
   function updateTeamData (teams, gameData) {
     const parsedTeams = {}
 
-    if (gameData.basicGameData.vTeam.triCode === teams[0].triCode) {
-      teams[0].id = gameData.basicGameData.vTeam.teamId
+    if (gameData.away_team.tricode === teams[0].triCode) {
+      teams[0].id = gameData.away_team.id
       parsedTeams.visitor = teams[0]
 
-      teams[1].id = gameData.basicGameData.hTeam.teamId
+      teams[1].id = gameData.home_team.id
       parsedTeams.home = teams[1]
     } else {
-      teams[1].id = gameData.basicGameData.vTeam.teamId
+      teams[1].id = gameData.away_team.id
       parsedTeams.visitor = teams[1]
 
-      teams[0].id = gameData.basicGameData.hTeam.teamId
+      teams[0].id = gameData.home_team.id
       parsedTeams.home = teams[0]
     }
 
@@ -365,7 +359,7 @@ window.onload = () => {
     this.querySelectorAll('span')[0].classList.add('animate-validate')
 
     const currentData = window.fileData
-    const gameData = await getGameData(currentData.dateFormated, currentData.gameId)
+    const gameData = await getGameData(currentData.gameId)
 
     window.fileData.gameData = gameData
 
