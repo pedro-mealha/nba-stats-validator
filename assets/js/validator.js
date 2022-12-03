@@ -33,7 +33,10 @@ export function validatePlayerStats (playersTableId, teamId, titleId) {
 
 export function validateTeamStats (playersTableId, titleId) {
   const table = document.getElementById(playersTableId)
-  const stats = table.querySelector('tfoot').querySelectorAll('tr')[1].querySelectorAll('td')
+  const totalStats = table.querySelector('tfoot').querySelectorAll('tr')[1].querySelectorAll('td')
+  const teamStats = table.querySelector('tfoot').querySelectorAll('tr')[2].querySelectorAll('td')
+  const stats = [...totalStats].concat([...teamStats])
+
   const nbaStats = fetchNbaTeamStats(playersTableId)
   const errors = validateStats(stats, nbaStats)
 

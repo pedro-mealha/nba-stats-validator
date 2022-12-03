@@ -102,7 +102,7 @@ function addTeamScores (score, id) {
         <td data-match-key="reb" data-match-key-type="int">${score.totalRebounds}</td>
         <td data-match-key="ast" data-match-key-type="int">${score.assists}</td>
         <td data-match-key="pf" data-match-key-type="int">${score.personalFouls}</td>
-        <td data-match-key="pd" data-match-key-type="int">${score.foulsDrawn}</td>
+        <td data-match-key="fd" data-match-key-type="int">${score.foulsDrawn}</td>
         <td data-match-key="stl" data-match-key-type="int">${score.steals}</td>
         <td data-match-key="to" data-match-key-type="int">${score.turnouvers}</td>
         <td data-match-key="blk" data-match-key-type="int">${score.blocks}</td>
@@ -131,11 +131,12 @@ function addTeamSecondaryScores (score, id) {
         <td></td>
         <td></td>
         <td></td>
-        <td data-match-key="teamReb" data-match-key-type="int">${score.teamRebounds}</td>
+        <td data-match-key="rebt" data-match-key-type="int">${score.teamRebounds}</td>
         <td></td>
         <td></td>
         <td></td>
-        <td data-match-key="turnovers" data-match-key-type="int">${score.teamTurnovers}</td>
+        <td></td>
+        <td data-match-key="tot" data-match-key-type="int">${score.teamTurnovers}</td>
         <td></td>
         <td></td>
       </tr>
