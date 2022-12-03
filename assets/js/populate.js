@@ -69,6 +69,7 @@ function populatePlyersTable (players, id) {
         <td data-match-key="reb" data-match-key-type="int">${player.totalRebounds}</td>
         <td data-match-key="ast" data-match-key-type="int">${player.assists}</td>
         <td data-match-key="pf" data-match-key-type="int">${player.personalFouls}</td>
+        <td data-match-key="fd" data-match-key-type="int">${player.foulsDrawn}</td>
         <td data-match-key="stl" data-match-key-type="int">${player.steals}</td>
         <td data-match-key="to" data-match-key-type="int">${player.turnouvers}</td>
         <td data-match-key="blk" data-match-key-type="int">${player.blocks}</td>
@@ -101,6 +102,7 @@ function addTeamScores (score, id) {
         <td data-match-key="reb" data-match-key-type="int">${score.totalRebounds}</td>
         <td data-match-key="ast" data-match-key-type="int">${score.assists}</td>
         <td data-match-key="pf" data-match-key-type="int">${score.personalFouls}</td>
+        <td data-match-key="pd" data-match-key-type="int">${score.foulsDrawn}</td>
         <td data-match-key="stl" data-match-key-type="int">${score.steals}</td>
         <td data-match-key="to" data-match-key-type="int">${score.turnouvers}</td>
         <td data-match-key="blk" data-match-key-type="int">${score.blocks}</td>

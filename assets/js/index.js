@@ -222,7 +222,7 @@ window.onload = () => {
         defensiveRebounds,
         totalRebounds,
         assists,
-        , // FR
+        foulsDrawn,
         personalFouls,
         steals,
         turnouvers,
@@ -261,6 +261,7 @@ window.onload = () => {
         totalRebounds: parseInt(totalRebounds.textContent.trim(), 10),
         assists: parseInt(assists.textContent.trim(), 10),
         personalFouls: parseInt(personalFouls.textContent.trim(), 10),
+        foulsDrawn: parseInt(foulsDrawn.textContent.trim(), 10),
         steals: parseInt(steals.textContent.trim(), 10),
         turnouvers: parseInt(turnouvers.textContent.trim(), 10),
         blocks: parseInt(blocks.textContent.trim(), 10),
