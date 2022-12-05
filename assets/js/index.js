@@ -277,6 +277,11 @@ window.onload = () => {
     stats.teamRebounds = elements[7].innerText || '-'
     stats.teamTurnovers = elements[10].innerText || '-'
 
+    // Team TOT (total rebounds) also includes team rebounds
+    if (stats.teamRebounds !== '-') {
+      stats.totalRebounds += parseInt(stats.teamRebounds, 10)
+    }
+
     return stats
   }
 
