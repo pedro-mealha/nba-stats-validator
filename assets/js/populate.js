@@ -74,6 +74,7 @@ function populatePlyersTable (players, id) {
         <td data-match-key="to" data-match-key-type="int">${player.turnouvers}</td>
         <td data-match-key="blk" data-match-key-type="int">${player.blocks}</td>
         <td data-match-key="pts" data-match-key-type="int">${player.points}</td>
+        <td data-match-key="minus_plus" data-match-key-type="int">${player.plusMinusPts}</td>
       </tr>
     `
   }
@@ -107,6 +108,7 @@ function addTeamScores (score, id) {
         <td data-match-key="to" data-match-key-type="int">${score.turnouvers}</td>
         <td data-match-key="blk" data-match-key-type="int">${score.blocks}</td>
         <td data-match-key="pts" data-match-key-type="int">${score.points}</td>
+        <td data-match-key="plus_minus" data-match-key-type="int">${score.plusMinusPts}</td>
       </tr>
   `
 
@@ -137,6 +139,7 @@ function addTeamSecondaryScores (score, id) {
         <td></td>
         <td></td>
         <td data-match-key="tot" data-match-key-type="int">${score.teamTurnovers}</td>
+        <td></td>
         <td></td>
         <td></td>
       </tr>

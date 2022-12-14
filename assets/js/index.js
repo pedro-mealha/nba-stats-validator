@@ -227,8 +227,8 @@ window.onload = () => {
         steals,
         turnouvers,
         blocks,
-        points
-        // +/-
+        points,
+        plusMinusPts
       ] = stat.querySelectorAll('td')
 
       const [lastName, firstName] = name.textContent.split(',')
@@ -265,7 +265,8 @@ window.onload = () => {
         steals: parseInt(steals.textContent.trim(), 10),
         turnouvers: parseInt(turnouvers.textContent.trim(), 10),
         blocks: parseInt(blocks.textContent.trim(), 10),
-        points: parseInt(points.textContent.trim(), 10)
+        points: parseInt(points.textContent.trim(), 10),
+        plusMinusPts: parseInt(plusMinusPts.textContent.trim(), 10)
       })
     }
 
