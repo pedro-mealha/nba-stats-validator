@@ -5,7 +5,7 @@
   "main": "./assets/js/index.js",
   "license": "GNU",
   "engines": {
-    "npm": "8.11.0"
+    "npm": "9.6.2"
   },
   "scripts": {
     "watch": "webpack --watch --mode=development",
@@ -14,13 +14,14 @@
     "build:dev": "webpack --mode=development"
   },
   "dependencies": {
-    "webpack": "^5.76.3",
-    "html-webpack-plugin": "^5.5.0",
-    "css-minimizer-webpack-plugin": "^5.0.0",
-    "css-loader": "^6.7.3",
-    "terser-webpack-plugin": "^5.3.7",
     "copy-webpack-plugin": "^11.0.0",
-    "style-loader": "^3.3.2"
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^5.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "npm": "^9.6.2",
+    "style-loader": "^3.3.2",
+    "terser-webpack-plugin": "^5.3.7",
+    "webpack": "^5.76.3"
   },
   "devDependencies": {
     "browser-sync": "^2.29.1",
