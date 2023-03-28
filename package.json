@@ -16,7 +16,7 @@
   "dependencies": {
     "webpack": "^5.76.3",
     "html-webpack-plugin": "^5.5.0",
-    "css-minimizer-webpack-plugin": "^4.2.2",
+    "css-minimizer-webpack-plugin": "^5.0.0",
     "css-loader": "^6.7.3",
     "terser-webpack-plugin": "^5.3.7",
     "copy-webpack-plugin": "^11.0.0",
