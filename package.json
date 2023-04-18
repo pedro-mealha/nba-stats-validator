@@ -17,7 +17,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^5.0.0",
-    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-plugin": "^5.5.1",
     "npm": "^9.6.4",
     "style-loader": "^3.3.2",
     "terser-webpack-plugin": "^5.3.7",
