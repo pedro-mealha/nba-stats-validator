@@ -21,5 +21,6 @@ jobs:
           VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_MARKDOWN: true
           MARKDOWN_CONFIG_FILE: .markdownlint.yaml
+          LINTER_RULES_PATH: ./
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

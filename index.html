@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdn.worldvectorlogo.com https://nbastats.staging.api.pedromealha.dev https://nbastats.api.pedromealha.dev https://cdn.nba.com https://img.shields.io; script-src https://cdn.jsdelivr.net 'self' 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdn.worldvectorlogo.com https://nbastats.staging.api.pedromealha.dev https://nbastats.api.pedromealha.dev https://cdn.nba.com https://img.shields.io script-src https://cdn.jsdelivr.net 'self' 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net  https://nbastats.staging.api.pedromealha.dev https://nbastats.api.pedromealha.dev https://cdn.nba.com https://ak-static.cms.nba.com https://img.shields.io; script-src https://cdn.jsdelivr.net 'self' 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net https://nbastats.staging.api.pedromealha.dev https://nbastats.api.pedromealha.dev https://cdn.nba.com https://ak-static.cms.nba.com https://img.shields.io script-src https://cdn.jsdelivr.net 'self' 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'">
 
     <title>Nba stats validator</title>
 
@@ -20,13 +20,17 @@
   </head>
   <body>
     <div id="lading-page" class="center">
-      <button id="open-file-btn">
-        Upload File
-      </button>
+        <img id="open-nba-file-btn" src="https://cdn.nba.com/logos/leagues/logo-nba-logoman.svg" height="180" width="90" title="small nba logo" alt="small nba logo" class="small-league-logo" loading="lazy">
+        <img id="open-wnba-file-btn" src="https://cdn.nba.com/logos/leagues/logo-wnba.svg" height="180" width="90" title="small wnba logo" alt="small wnba logo" class="small-league-logo" loading="lazy">
     </div>
 
-    <div id="loading" class="center d-none">
-        <img src="https://cdn.nba.com/logos/leagues/logo-nba.svg" height="120" width="130" title="nba team logo" alt="nba team logo" class="nba-logo" loading="lazy">
+    <div id="loading-nba" class="center d-none">
+        <img src="https://cdn.nba.com/logos/leagues/logo-nba.svg" height="120" width="130" title="nba logo" alt="nba logo" class="league-logo" loading="lazy">
+        <p class="text-center loading" style="font-size: 1.5em;">Loading ...</p>
+    </div>
+
+    <div id="loading-wnba" class="center d-none">
+        <img src="https://ak-static.cms.nba.com/wp-content/themes/wnba-parent/img/logos/wnba-secondary-logo.svg" height="120" width="130" title="wnba logo" alt="wnba logo" class="league-logo" loading="lazy">
         <p class="text-center loading" style="font-size: 1.5em;">Loading ...</p>
     </div>
 
