@@ -17,15 +17,15 @@ export async function getGameMetadata (date, league, teams) {
     })
 }
 
-export async function getGameData (gameId) {
-  return httpGet(`${getApiBaseUrl()}/boxscore?gameId=${gameId}`)
+export async function getGameData (gameId, league) {
+  return httpGet(`${getApiBaseUrl()}/boxscore?gameId=${gameId}&league=${league}`)
     .then(function (response) {
       return response
     })
 }
 
-export function getTeamLogo (teamId) {
-  return getCdnBaseUrl() + `logos/nba/${teamId}/global/L/logo.svg`
+export function getTeamLogo (teamId, league) {
+  return getCdnBaseUrl() + `logos/${league}/${teamId}/global/L/logo.svg`
 }
 
 function httpGet (url) {

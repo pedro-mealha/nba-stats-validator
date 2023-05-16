@@ -3,24 +3,32 @@ import { getGameMetadata, getGameData, getTeamLogo } from './external.js'
 import { reValidateData } from './validator.js'
 
 window.onload = () => {
-  const openFileBtn = document.getElementById('open-file-btn')
-
   const input = document.createElement('input')
   input.type = 'file'
+
+  let league = 'nba'
 
   document.getElementById('open-new-file-btn').onclick = () => {
     input.click()
   }
 
-  openFileBtn.onclick = () => {
+  document.getElementById('open-nba-file-btn').onclick = () => {
+    league = 'nba'
+    input.click()
+  }
+
+  document.getElementById('open-wnba-file-btn').onclick = () => {
+    league = 'wnba'
     input.click()
   }
 
   input.onchange = e => {
     document.getElementById('content').style.display = 'none'
     document.getElementsByTagName('footer')[0].style.bottom = 0
-    document.getElementById('open-file-btn').classList.add('d-none')
-    document.getElementById('loading').classList.remove('d-none')
+    document.getElementById('open-nba-file-btn').classList.add('d-none')
+    document.getElementById('open-wnba-file-btn').classList.add('d-none')
+
+    displayLoading(league)
 
     const file = e.target.files[0]
     const filename = file.name.replace('.htm', '')
@@ -32,11 +40,11 @@ window.onload = () => {
       const fileData = readerEvent.target.result
 
       window.rawFileData = fileData
-      parseFileHtml(fileData, filename)
+      parseFileHtml(fileData, filename, league)
     }
   }
 
-  async function parseFileHtml (fileData, filename) {
+  async function parseFileHtml (fileData, filename, league) {
     const parser = new DOMParser()
     const html = parser.parseFromString(fileData, 'text/html')
 
@@ -47,9 +55,9 @@ window.onload = () => {
     const teamOnePlayersTable = tables[2]
     const teamTwoPlayersTable = tables[3]
 
-    let teams = getTeams(gameInfoTable, filename)
+    let teams = getTeams(gameInfoTable, filename, league)
     if (typeof teams[0].triCode === 'undefined' || typeof teams[1].triCode === 'undefined') {
-      document.getElementById('loading').classList.add('d-none')
+      hideLoading(league)
       document.getElementById('team-inputs').classList.remove('d-none')
 
       return
@@ -65,8 +73,8 @@ window.onload = () => {
     }
 
     const dateFormated = `${parsedData.date.getFullYear()}-${('0' + (parsedData.date.getMonth() + 1)).slice(-2)}-${('0' + parsedData.date.getDate()).slice(-2)}`
-    const { gameId, gameStartsAt } = await getGameMetadata(dateFormated, 'nba', teams)
-    const gameData = await getGameData(gameId)
+    const { gameId, gameStartsAt } = await getGameMetadata(dateFormated, league, teams)
+    const gameData = await getGameData(gameId, league)
 
     parsedData.date = dateFormated
     parsedData.startsAt = gameStartsAt
@@ -78,9 +86,10 @@ window.onload = () => {
 
     window.fileData = parsedData
     populateHtml(parsedData)
+    hideLoading(league)
   }
 
-  function getTeams (gameInfoTable, filename) {
+  function getTeams (gameInfoTable, filename, league) {
     let teams = gameInfoTable.querySelectorAll('tr')[1].firstElementChild.textContent
     teams = teams.split(' Vs ')
 
@@ -89,26 +98,34 @@ window.onload = () => {
 
     return teams.map((team, key) => {
       const fallback = key === 0 ? teamOneTriCode : teamTwoTriCode
-      return getTeamBasicData(team, fallback)
+      return getTeamBasicData(team, fallback, league)
     })
   }
 
-  function getTeamBasicData (team, fallback) {
-    const exceptions = [
-      { name: 'Golden State', triCode: 'GSW' },
-      { name: 'Los Angeles', triCode: ['LAC', 'LAL'] },
-      { name: 'New York', triCode: 'NYK' },
-      { name: 'New Orleans', triCode: 'NOP' },
-      { name: 'Oklahoma City', triCode: 'OKC' },
-      { name: 'Brooklyn', triCode: 'BKN' },
-      { name: 'San Antonio', triCode: 'SAS' },
-      { name: 'Phoenix', triCode: 'PHX' },
-      { name: 'Washington', triCode: 'WSH' }
-    ]
+  function getTeamBasicData (team, fallback, league) {
+    const exceptions =
+    {
+      nba: [
+        { name: 'Golden State', triCode: 'GSW' },
+        { name: 'Los Angeles', triCode: ['LAC', 'LAL'] },
+        { name: 'New York', triCode: 'NYK' },
+        { name: 'New Orleans', triCode: 'NOP' },
+        { name: 'Oklahoma City', triCode: 'OKC' },
+        { name: 'Brooklyn', triCode: 'BKN' },
+        { name: 'San Antonio', triCode: 'SAS' },
+        { name: 'Phoenix', triCode: 'PHX' },
+        { name: 'Washington', triCode: 'WSH' }
+      ],
+      wnba: [
+        { name: 'Los Angeles', triCode: 'LAS' },
+        { name: 'Las Vegas', triCode: 'LVA' },
+        { name: 'New York', triCode: 'NYL' }
+      ]
+    }
 
     let triCode = team.substring(0, 3)
 
-    const teamException = exceptions.filter(exception => exception.name === team)
+    const teamException = exceptions[league].filter(exception => exception.name === team)
     if (teamException.length > 0) {
       triCode = teamException[0].triCode
 
@@ -303,8 +320,8 @@ window.onload = () => {
       parsedTeams.home = teams[0]
     }
 
-    parsedTeams.home.logo = getTeamLogo(parsedTeams.home.id)
-    parsedTeams.visitor.logo = getTeamLogo(parsedTeams.visitor.id)
+    parsedTeams.home.logo = getTeamLogo(parsedTeams.home.id, league)
+    parsedTeams.visitor.logo = getTeamLogo(parsedTeams.visitor.id, league)
 
     return parsedTeams
   }
@@ -346,10 +363,10 @@ window.onload = () => {
     const visitorTeamTriCode = document.getElementById('visitor-team-tri-text').value
     const newFileName = `${visitorTeamTriCode}-VS-${homeTeamTriCode}`
 
-    document.getElementById('loading').classList.remove('d-none')
+    displayLoading(league)
     document.getElementById('team-inputs').classList.add('d-none')
 
-    parseFileHtml(window.rawFileData, newFileName)
+    parseFileHtml(window.rawFileData, newFileName, league)
   }
 
   document.onkeyup = function (e) {
@@ -366,10 +383,22 @@ window.onload = () => {
     this.querySelectorAll('span')[0].classList.add('animate-validate')
 
     const currentData = window.fileData
-    const gameData = await getGameData(currentData.gameId)
+    const gameData = await getGameData(currentData.gameId, league)
 
     window.fileData.gameData = gameData
 
     reValidateData(window.fileData)
+  }
+
+  function displayLoading (league) {
+    league === 'nba'
+      ? document.getElementById('loading-nba').classList.remove('d-none')
+      : document.getElementById('loading-wnba').classList.remove('d-none')
+  }
+
+  function hideLoading (league) {
+    league === 'nba'
+      ? document.getElementById('loading-nba').classList.add('d-none')
+      : document.getElementById('loading-wnba').classList.add('d-none')
   }
 }
