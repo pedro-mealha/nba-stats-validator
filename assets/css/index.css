@@ -45,7 +45,6 @@ body {
 .team-logo {
   max-width: 60%;
   filter: drop-shadow(3px 3px 2px rgb(0 0 0 / 70%));
-  filter: drop-shadow(5px 5px 3px rgb(0 0 0 / 70%));
 }
 
 .final-score {
