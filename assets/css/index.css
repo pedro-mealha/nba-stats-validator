@@ -27,7 +27,7 @@ body {
 #visitor-team-name-players-title,
 #home-team-name-players-title,
 #home-team-name,
-#visitor-team-name:first-letter {
+#visitor-team-name::first-letter {
   text-transform: capitalize;
 }
 
@@ -44,8 +44,8 @@ body {
 
 .team-logo {
   max-width: 60%;
-  -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 70%));
-  filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 70%));
+  filter: drop-shadow(3px 3px 2px rgb(0 0 0 / 70%));
+  filter: drop-shadow(5px 5px 3px rgb(0 0 0 / 70%));
 }
 
 .final-score {
@@ -62,7 +62,6 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
@@ -156,13 +155,8 @@ footer {
   padding-bottom: 1%;
 }
 
-footer .github-link:link, footer .github-link:visited {
-  text-decoration: underline;
-  color: white;
-}
-
-footer .github-link{
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+footer .github-link {
+  background: linear-gradient(45deg, #f00, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #f00);
   background-size: 200% 200%;
   animation: rainbow 2s ease-in-out infinite;
   background-clip: text;
@@ -170,14 +164,20 @@ footer .github-link{
   transition: color .2s ease-in-out;
 }
 
-footer .github-link:hover{
-  color:rgba(0, 0, 0, 0);
+footer .github-link:link,
+footer .github-link:visited {
+  text-decoration: underline;
+  color: white;
 }
 
-@keyframes rainbow { 
-  0%{background-position:left}
-  50%{background-position:right}
-  100%{background-position:left}
+footer .github-link:hover {
+  color:rgb(0 0 0 / 0%);
+}
+
+@keyframes rainbow {
+  0% { background-position: left; }
+  50% { background-position: right; }
+  100% { background-position: left; }
 }
 
 /* Rules for sizing the icon. */
@@ -188,12 +188,12 @@ footer .github-link:hover{
 .material-icons.md-48 { font-size: 48px; }
 
 /* Rules for using icons as black on a light background. */
-.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
-.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+.material-icons.md-dark { color: rgb(0 0 0 / 54%); }
+.material-icons.md-dark.md-inactive { color: rgb(0 0 0 / 26%); }
 
 /* Rules for using icons as white on a dark background. */
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
-.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+.material-icons.md-light { color: rgb(255 255 255 / 100%); }
+.material-icons.md-light.md-inactive { color: rgb(255 255 255 / 30%); }
 
 .animate-validate {
   animation: full-spin 1.2s linear infinite;
