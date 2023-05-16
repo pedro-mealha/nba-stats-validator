@@ -155,7 +155,7 @@ footer .github-link {
   background-size: 200% 200%;
   animation: rainbow 2s ease-in-out infinite;
   background-clip: text;
-  transition: color .2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 footer .github-link:link,
