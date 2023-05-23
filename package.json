@@ -20,7 +20,7 @@
     "html-webpack-plugin": "^5.5.1",
     "npm": "^9.6.7",
     "style-loader": "^3.3.3",
-    "terser-webpack-plugin": "^5.3.8",
+    "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.82.1"
   },
   "devDependencies": {
