@@ -21,7 +21,7 @@
     "npm": "^9.6.7",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",
-    "webpack": "^5.82.1"
+    "webpack": "^5.84.1"
   },
   "devDependencies": {
     "browser-sync": "^2.29.1",
