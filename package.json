@@ -24,7 +24,7 @@
     "webpack": "^5.82.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.29.1",
+    "browser-sync": "^2.29.3",
     "eslint": "^7.22.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.27.5",
