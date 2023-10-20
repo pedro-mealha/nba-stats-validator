@@ -21,15 +21,15 @@ jobs:
         run: npm install netlify-cli -g
 
       - name: Get deploy ID
-        id: get_deploy_id
+        id: get-deploy-id
         run: |
-          DEPLOY_ID=$(netlify api listSiteDeploys --data '{ "site_id": "${{ secrets.NETLIFY_SITE_ID }}", "page": 1, "per_page": 1}' | head -n 3 | tr '{' '\n' | tr , '\n' | tr '}' '\n' | grep "id" | awk  -F'"' '{print $4}')
-          echo "name=deploy_id::$DEPLOY_ID" >> "$GITHUB_OUTPUT"
+          ID=$(netlify api listSiteDeploys --data '{ "site_id": "${{ secrets.NETLIFY_SITE_ID }}", "page": 1, "per_page": 1}' | head -n 3 | tr '{' '\n' | tr , '\n' | tr '}' '\n' | grep "id" | awk  -F'"' '{print $4}')
+          echo "DEPLOY_ID=$ID" >> "$GITHUB_OUTPUT"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
       - name: Publish
         run: |
-          netlify api restoreSiteDeploy --data '{ "site_id": "${{ secrets.NETLIFY_SITE_ID }}", "deploy_id": "${{ steps.get_deploy_id.outputs.deploy_id }}" }'
+          netlify api restoreSiteDeploy --data '{ "site_id": "${{ secrets.NETLIFY_SITE_ID }}", "deploy_id": "${{ steps.get-deploy-id.outputs.DEPLOY_ID }}" }'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
