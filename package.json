@@ -27,7 +27,7 @@
     "browser-sync": "^3.0.4",
     "eslint": "^9.28.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-node": "^11.1.0",
     "stylelint": "^16.20.0",
     "stylelint-config-recommended": "^16.0.0",
